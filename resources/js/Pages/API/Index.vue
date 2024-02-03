@@ -1,5 +1,4 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
 import Header from "@/Layouts/Header.vue";
 import ApiTokenManager from "@/Pages/API/Partials/ApiTokenManager.vue";
 
@@ -11,7 +10,6 @@ defineProps({
 </script>
 
 <template>
-  <Head title="API Tokens" />
   <Header title="API Tokens" />
 
   <div>
