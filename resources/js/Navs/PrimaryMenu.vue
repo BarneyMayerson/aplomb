@@ -6,6 +6,7 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import ThemeDropdown from "@/Components/ThemeDropdown.vue";
 
 const showingNavigationDropdown = ref(false);
 
@@ -41,8 +42,12 @@ const logout = () => {
         </div>
 
         <div class="hidden sm:flex sm:items-center sm:ms-6">
+          <!-- Themes Dropdown-->
+          <div>
+            <ThemeDropdown />
+          </div>
           <!-- Settings Dropdown -->
-          <div class="ms-3 relative">
+          <div class="ms-6 relative">
             <Dropdown align="right" width="48">
               <template #trigger>
                 <button
