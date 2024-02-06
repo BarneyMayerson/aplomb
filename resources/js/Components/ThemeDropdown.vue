@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import SunSolidIcon from "@/Components/Icons/SunSolidIcon.vue";
@@ -18,6 +18,31 @@ defineProps({
 });
 
 const theme = ref("system");
+const themes = ["light", "dark"];
+
+onMounted(() => {
+  if (themes.includes(localStorage.appTheme)) {
+    theme.value = localStorage.appTheme;
+  }
+});
+
+watch(theme, (themeValue) => {
+  if (themeValue === "light") {
+    localStorage.appTheme = "light";
+    document.documentElement.classList.remove("dark");
+  }
+
+  if (themeValue === "dark") {
+    localStorage.appTheme = "dark";
+    document.documentElement.classList.add("dark");
+  }
+
+  if (themeValue === "system") {
+    localStorage.removeItem("appTheme");
+  }
+
+  console.log(document.documentElement.classList);
+});
 
 const toggleLightTheme = () => {
   theme.value = "light";
