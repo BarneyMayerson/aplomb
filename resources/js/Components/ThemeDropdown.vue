@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import SunSolidIcon from "@/Components/Icons/SunSolidIcon.vue";
@@ -20,10 +20,25 @@ defineProps({
 const theme = ref("system");
 const themes = ["light", "dark"];
 
+const matcher = window.matchMedia("(prefers-color-scheme: dark)");
+const listener = () => {
+  if (theme.value === "system") {
+    applySystemTheme();
+  }
+};
+
 onMounted(() => {
   if (themes.includes(localStorage.appTheme)) {
     theme.value = localStorage.appTheme;
   }
+
+  matcher.addEventListener("change", listener);
+
+  listener();
+});
+
+onBeforeUnmount(() => {
+  matcher.removeEventListener("change", listener);
 });
 
 watch(theme, (themeValue) => {
@@ -39,9 +54,8 @@ watch(theme, (themeValue) => {
 
   if (themeValue === "system") {
     localStorage.removeItem("appTheme");
+    applySystemTheme();
   }
-
-  console.log(document.documentElement.classList);
 });
 
 const toggleLightTheme = () => {
@@ -54,6 +68,14 @@ const toggleDarkTheme = () => {
 
 const toggleSystemTheme = () => {
   theme.value = "system";
+};
+
+const applySystemTheme = () => {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
 };
 </script>
 
