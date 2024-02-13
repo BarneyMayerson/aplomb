@@ -1,4 +1,5 @@
 <script setup>
+import { Modal } from "momentum-modal";
 import Banner from "@/Components/Banner.vue";
 import PrimaryMenu from "@/Navs/PrimaryMenu.vue";
 </script>
@@ -14,4 +15,5 @@ import PrimaryMenu from "@/Navs/PrimaryMenu.vue";
       </main>
     </div>
   </div>
+  <Modal />
 </template>
