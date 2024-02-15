@@ -22,6 +22,10 @@ Route::get("/", function () {
         "laravelVersion" => Application::VERSION,
         "phpVersion" => PHP_VERSION,
     ]);
+})->name("home");
+
+Route::get("/modal", function () {
+    return Inertia::modal("Modal")->baseRoute("home");
 });
 
 Route::middleware([
