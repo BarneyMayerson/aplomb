@@ -8,6 +8,7 @@ const { close } = useModal();
 
 <template>
   <SlideDialogModal
+    @close="close"
     max-width="xl"
     dialog-title="Title for the Slide Dialog Modal Window"
   >

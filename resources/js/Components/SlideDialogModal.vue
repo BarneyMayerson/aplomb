@@ -1,5 +1,6 @@
 <script setup>
 import SlideModal from "@/Components/SlideModal.vue";
+
 defineProps({
   maxWidth: {
     type: String,

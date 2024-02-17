@@ -11,6 +11,10 @@ import { useModal } from "momentum-modal";
 import XMarkIcon from "./Icons/XMarkIcon.vue";
 import { onMounted, onUnmounted } from "vue";
 
+const emit = defineEmits(["close"]);
+
+const close = () => emit("close");
+
 const props = defineProps({
   maxWidth: {
     type: String,
@@ -28,7 +32,7 @@ const maxWidthClass = computed(() => {
   }[props.maxWidth];
 });
 
-const { show, close, redirect } = useModal();
+const { show, redirect } = useModal();
 
 onMounted(() => {
   document.body.classList.add("overflow-hidden");
