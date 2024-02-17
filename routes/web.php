@@ -25,7 +25,11 @@ Route::get("/", function () {
 })->name("home");
 
 Route::get("/modal", function () {
-    return Inertia::modal("Modal")->baseRoute("home");
+    return Inertia::modal("Modal")->baseRoute("dashboard");
+});
+
+Route::get("/modal2", function () {
+    return Inertia::modal("Modal2")->baseRoute("dashboard");
 });
 
 Route::middleware([

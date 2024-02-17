@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 defineProps({
@@ -38,9 +38,6 @@ defineProps({
     </div>
 
     <div class="max-w-7xl mx-auto p-6 lg:p-8">
-      <Link href="/modal">
-        <PrimaryButton>Sliding Modal</PrimaryButton>
-      </Link>
       <div class="flex justify-center">
         <svg
           viewBox="0 0 62 65"

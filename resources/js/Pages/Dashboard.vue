@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 import Header from "@/Layouts/Header.vue";
-import Welcome from "@/Components/Welcome.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 
@@ -21,9 +21,17 @@ const showDialogModal = ref(false);
             <SecondaryButton @click="showDialogModal = true">
               Dialog Modal
             </SecondaryButton>
+
+            <Link href="/modal">
+              <SecondaryButton>Sliding Modal</SecondaryButton>
+            </Link>
+
+            <Link href="/modal2">
+              <SecondaryButton>Slide Modal</SecondaryButton>
+            </Link>
           </div>
         </div>
-        <Welcome />
+        <!-- <Welcome /> -->
       </div>
     </div>
   </div>
