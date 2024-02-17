@@ -23,10 +23,6 @@ const showDialogModal = ref(false);
             </SecondaryButton>
 
             <Link href="/modal">
-              <SecondaryButton>Sliding Modal</SecondaryButton>
-            </Link>
-
-            <Link href="/modal2">
               <SecondaryButton>Slide Modal</SecondaryButton>
             </Link>
           </div>

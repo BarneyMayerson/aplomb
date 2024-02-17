@@ -28,10 +28,6 @@ Route::get("/modal", function () {
     return Inertia::modal("Modal")->baseRoute("dashboard");
 });
 
-Route::get("/modal2", function () {
-    return Inertia::modal("Modal2")->baseRoute("dashboard");
-});
-
 Route::middleware([
     "auth:sanctum",
     config("jetstream.auth_session"),
