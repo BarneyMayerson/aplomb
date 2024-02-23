@@ -1,6 +1,5 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
   canLogin: Boolean,
