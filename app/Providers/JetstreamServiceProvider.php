@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
@@ -37,6 +38,19 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::registerView(function () {
             return Inertia::modal("Auth/Register")->baseRoute("home");
+        });
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return Inertia::modal("Auth/ForgotPassword", [
+                "status" => session("status"),
+            ])->baseRoute("home");
+        });
+
+        Fortify::resetPasswordView(function (Request $request) {
+            return Inertia::modal("Auth/ResetPassword", [
+                "email" => $request["email"],
+                "token" => $request["token"],
+            ])->baseRoute("home");
         });
     }
 
