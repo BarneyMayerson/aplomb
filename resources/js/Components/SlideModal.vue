@@ -76,7 +76,7 @@ onUnmounted(() => {
             enter-to="translate-0"
             leave="duration-1000 ease-in"
             leave-from="translate-0"
-            leave-to="opacity-0 translate-y-full"
+            leave-to="opacity-0 -translate-y-full"
           >
             <DialogPanel
               class="sm:w-full transform overflow-hidden rounded-2xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl shadow-black transition-all md:px-10 md:py-10"

@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <SlideModal>
+  <SlideModal :maxWidth="maxWidth">
     <template #title>{{ dialogTitle }}</template>
 
     <div class="mt-8 text-gray-600 dark:text-gray-400">
