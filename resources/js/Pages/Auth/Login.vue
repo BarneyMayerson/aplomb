@@ -1,5 +1,5 @@
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import { useModal } from "momentum-modal";
 import AuthenticationCardLogo from "@/Components/AuthenticationCardLogo.vue";
 import Checkbox from "@/Components/Checkbox.vue";
@@ -35,7 +35,9 @@ const { close } = useModal();
 </script>
 
 <template>
-  <SlideDialogModal @close="close" maxWidth="md" dialogTitle="Login">
+  <Head title="Login" />
+
+  <SlideDialogModal @close="close" maxWidth="md" dialogTitle="Log In">
     <template #content>
       <div class="flex justify-center mb-4">
         <AuthenticationCardLogo />

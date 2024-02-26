@@ -34,6 +34,10 @@ class JetstreamServiceProvider extends ServiceProvider
                 "status" => session("status"),
             ])->baseRoute("home");
         });
+
+        Fortify::registerView(function () {
+            return Inertia::modal("Auth/Register")->baseRoute("home");
+        });
     }
 
     /**
