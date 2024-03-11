@@ -38,4 +38,22 @@ defineProps({
       </Link>
     </div>
   </nav>
+  <section class="border border-yellow-400">
+    <div
+      class="border border-fuchsia-400 relative container flex flex-col mx-auto"
+    >
+      <div class="lg:flex-center">
+        <h1
+          class="z-20text-balance text-center font-kanit text-[50px] uppercase md:text-[7vw] lg:mb-0 lg:mt-0 lg:text-left xl:text-[8vw] 2xl:text-[9vw]"
+          style="line-height: 0.8em"
+        >
+          <span
+            class="inline-block bg-clip-text text-transparent bg-gradient-to-r from-black via-gray-700 to-gray-500 dark:from-white dark:via-gray-200 dark:to-gray-400"
+          >
+            Straight for the NFS&nbsp;Underground racers.
+          </span>
+        </h1>
+      </div>
+    </div>
+  </section>
 </template>
