@@ -46,14 +46,7 @@ defineProps({
           Your browser does not support HTML5 video.
         </video>
         <div
-          class="absolute inset-0"
-          style="
-            background-image: radial-gradient(
-              circle at 2% 22%,
-              rgba(2, 4, 7, 0),
-              rgb(2, 4, 7) 79%
-            );
-          "
+          class="absolute inset-0 bg-[radial-gradient(circle_at_2%_22%,rgba(2,4,7,0),rgb(2,4,7)_79%)]"
         ></div>
       </div>
       <div class="z-20 absolute bottom-1 left-1">
@@ -62,7 +55,7 @@ defineProps({
           style="line-height: 0.8em"
         >
           <span
-            class="inline-block bg-clip-text text-transparent bg-gradient-to-r from-black via-gray-700 to-gray-500 dark:from-white dark:via-gray-200 dark:to-gray-400"
+            class="inline-block bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 dark:from-white dark:via-gray-200 dark:to-gray-400"
           >
             Straight for the NFS&nbsp;Underground racers.
           </span>
