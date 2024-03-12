@@ -51,7 +51,7 @@ defineProps({
       </div>
       <div class="z-20 absolute bottom-1 left-1">
         <h1
-          class="z-20text-balance text-center font-kanit text-[50px] uppercase md:text-[7vw] lg:mb-0 lg:mt-0 lg:text-left xl:text-[8vw] 2xl:text-[9vw]"
+          class="z-20text-balance text-center font-kanit text-[50px] uppercase md:text-[6vw] lg:mb-0 lg:mt-0 lg:text-left xl:text-[7vw] 2xl:text-[8vw]"
           style="line-height: 0.8em"
         >
           <span
