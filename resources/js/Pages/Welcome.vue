@@ -38,11 +38,9 @@ defineProps({
     </div>
   </nav>
 
-  <section class="border border-yellow-400">
-    <div
-      class="border border-fuchsia-400 relative container flex flex-col mx-auto"
-    >
-      <div class="m-1 border border-green-400 z-0">
+  <section>
+    <div class="relative container mx-auto">
+      <div class="z-0">
         <video autoplay muted loop class="w-full h-full grayscale">
           <source src="/storage/nfsu-trailer.mp4" type="video/mp4" />
           Your browser does not support HTML5 video.
@@ -58,7 +56,7 @@ defineProps({
           "
         ></div>
       </div>
-      <div class="lg:flex-center mt-14 border border-purple-400 z-20">
+      <div class="z-20 absolute bottom-1 left-1">
         <h1
           class="z-20text-balance text-center font-kanit text-[50px] uppercase md:text-[7vw] lg:mb-0 lg:mt-0 lg:text-left xl:text-[8vw] 2xl:text-[9vw]"
           style="line-height: 0.8em"
