@@ -49,17 +49,30 @@ defineProps({
           class="absolute inset-0 bg-[radial-gradient(circle_at_2%_22%,rgba(2,4,7,0),rgb(2,4,7)_79%)]"
         ></div>
       </div>
-      <div class="z-20 absolute bottom-1 left-1">
+      <div
+        class="z-20 absolute inset-0 flex flex-col items-center gap-y-28 lg:flex-row lg:gap-x-8 px-2"
+      >
         <h1
-          class="z-20text-balance text-center font-kanit text-[50px] uppercase md:text-[6vw] lg:mb-0 lg:mt-0 lg:text-left xl:text-[7vw] 2xl:text-[8vw]"
+          class="z-20 text-balance text-center font-kanit text-[50px] uppercase py-24 md:text-[6vw] lg:text-left xl:text-[7vw] 2xl:text-[8vw]"
           style="line-height: 0.8em"
         >
           <span
             class="inline-block bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 dark:from-white dark:via-gray-200 dark:to-gray-400"
           >
-            Straight for the NFS&nbsp;Underground racers.
+            Straight for the NFS Underground racers.
           </span>
         </h1>
+
+        <div
+          class="z-10 h-auto flex-shrink-0 w-full overflow-visible rounded-xl border border-grey-600/10 bg-gray-900 p-6 text-white lg:w-64"
+        >
+          <div class="flex flex-col gap-y-5">
+            <a href="#">Competitions</a>
+            <a href="#">Tourneys</a>
+            <a href="#">Standings</a>
+            <a href="#">Game Server</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
