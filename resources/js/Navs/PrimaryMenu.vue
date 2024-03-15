@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { Link, router } from "@inertiajs/vue3";
-import ApplicationMark from "@/Components/ApplicationMark.vue";
+import AppLogo from "@/Components/AppLogo.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
@@ -25,8 +25,8 @@ const logout = () => {
         <div class="flex">
           <!-- Logo -->
           <div class="shrink-0 flex items-center">
-            <Link :href="route('dashboard')">
-              <ApplicationMark class="block h-9 w-auto" />
+            <Link :href="route('home')">
+              <AppLogo class="block h-9 w-auto" />
             </Link>
           </div>
 

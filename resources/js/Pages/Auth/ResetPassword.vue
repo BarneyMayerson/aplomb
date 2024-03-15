@@ -1,7 +1,7 @@
 <script setup>
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import { useModal } from "momentum-modal";
-import AuthenticationCardLogo from "@/Components/AuthenticationCardLogo.vue";
+import AppLogo from "@/Components/AppLogo.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -35,7 +35,9 @@ const { close } = useModal();
   <SlideDialogModal @close="close" maxWidth="md" dialogTitle="Reset Password">
     <template #content>
       <div class="flex justify-center mb-4">
-        <AuthenticationCardLogo />
+        <Link :href="route('home')">
+          <AppLogo class="h-20 w-full" />
+        </Link>
       </div>
 
       <form @submit.prevent="submit">
