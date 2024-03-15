@@ -1,9 +1,9 @@
 <script setup>
-import Header from "@/Layouts/Header.vue";
+import PageTitle from "@/Components/PageTitle.vue";
 </script>
 
 <template>
-  <Header title="Grid" />
+  <PageTitle title="Grid" />
 
   <div
     class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-gray-900 dark:text-gray-400"

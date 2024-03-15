@@ -1,5 +1,5 @@
 <script setup>
-import Header from "@/Layouts/Header.vue";
+import PageTitle from "@/Components/PageTitle.vue";
 import DeleteUserForm from "@/Pages/Profile/Partials/DeleteUserForm.vue";
 import LogoutOtherBrowserSessionsForm from "@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue";
 import SectionBorder from "@/Components/SectionBorder.vue";
@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <Header title="Profile" />
+  <PageTitle title="Profile" />
 
   <div>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

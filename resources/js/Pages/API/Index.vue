@@ -1,5 +1,5 @@
 <script setup>
-import Header from "@/Layouts/Header.vue";
+import PageTitle from "@/Components/PageTitle.vue";
 import ApiTokenManager from "@/Pages/API/Partials/ApiTokenManager.vue";
 
 defineProps({
@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <Header title="API Tokens" />
+  <PageTitle title="API Tokens" />
 
   <div>
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
-import Header from "@/Layouts/Header.vue";
+import PageTitle from "@/Components/PageTitle.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 
@@ -9,7 +9,7 @@ const showDialogModal = ref(false);
 </script>
 
 <template>
-  <Header title="Dashboard" />
+  <PageTitle title="Dashboard" />
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
