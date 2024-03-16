@@ -2,6 +2,7 @@
 import { Head, Link } from "@inertiajs/vue3";
 import AppLogo from "@/Components/AppLogo.vue";
 import ThemeDropdown from "@/Components/ThemeDropdown.vue";
+import LikeGameMenuItem from "@/Components/NFSUBrandTrivia/LikeGameMenuItem.vue";
 
 defineProps({
   canLogin: Boolean,
@@ -70,13 +71,13 @@ defineProps({
         </h1>
 
         <div
-          class="z-10 h-auto flex-shrink-0 w-full overflow-visible rounded-xl border border-grey-600/10 bg-gray-900 p-6 text-white lg:w-64"
+          class="z-10 h-auto flex-shrink-0 w-80 overflow-visible rounded-xl border border-grey-600/10 bg-gray-900 p-6"
         >
-          <div class="flex flex-col gap-y-5">
-            <a href="#">Competitions</a>
-            <a href="#">Tourneys</a>
-            <a href="#">Standings</a>
-            <a href="#">Game Server</a>
+          <div class="flex flex-col gap-y-3">
+            <LikeGameMenuItem href="#">Competitions</LikeGameMenuItem>
+            <LikeGameMenuItem href="#">Tourneys</LikeGameMenuItem>
+            <LikeGameMenuItem href="#">Standings</LikeGameMenuItem>
+            <LikeGameMenuItem href="#">Game Server</LikeGameMenuItem>
           </div>
         </div>
       </div>
