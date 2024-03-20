@@ -3,6 +3,7 @@ import { Head, Link } from "@inertiajs/vue3";
 import AppLogo from "@/Components/AppLogo.vue";
 import ThemeDropdown from "@/Components/ThemeDropdown.vue";
 import LikeGameMenuItem from "@/Components/NFSUBrandTrivia/LikeGameMenuItem.vue";
+import SpinCircle from "@/Components/NFSUBrandTrivia/SpinCircle.vue";
 
 defineProps({
   canLogin: Boolean,
@@ -74,6 +75,23 @@ defineProps({
           class="z-10 h-auto flex-shrink-0 w-80 overflow-visible rounded-xl border border-grey-600/10 bg-gray-900 p-6"
         >
           <div class="flex flex-col gap-y-3">
+            <div class="flex items-center justify-end">
+              <SpinCircle :pulseDuration="3" :rotateDuration="3" />
+              <SpinCircle :pulseDuration="1.3" opacityValues="0.2;1;0.2" />
+              <SpinCircle
+                :pulseDuration="1.8"
+                :rotateDuration="2.7"
+                opacityValues="0.5;0.9;0.5"
+              />
+              <SpinCircle :rotateDuration="2.8" opacityValues="0.3;1;0.3" />
+            </div>
+            <div class="my-3 flex justify-end">
+              <h3
+                class="font-san font-semibold text-4xl uppercase italic tracking-wider text-sky-300"
+              >
+                Main Menu
+              </h3>
+            </div>
             <LikeGameMenuItem href="#">Competitions</LikeGameMenuItem>
             <LikeGameMenuItem href="#">Tourneys</LikeGameMenuItem>
             <LikeGameMenuItem href="#">Standings</LikeGameMenuItem>
