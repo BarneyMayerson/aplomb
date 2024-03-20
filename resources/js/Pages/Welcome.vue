@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import AppLogo from "@/Components/AppLogo.vue";
-import ThemeDropdown from "@/Components/ThemeDropdown.vue";
 import LikeGameMenuItem from "@/Components/NFSUBrandTrivia/LikeGameMenuItem.vue";
 import SpinCircle from "@/Components/NFSUBrandTrivia/SpinCircle.vue";
 
@@ -16,9 +15,7 @@ defineProps({
 <template>
   <Head title="Welcome" />
 
-  <nav
-    class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700"
-  >
+  <nav class="bg-gray-800 border-b-2 border-gray-600">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div>
@@ -26,18 +23,17 @@ defineProps({
         </div>
 
         <div v-if="!$page.props.auth.user" class="flex items-center">
-          <ThemeDropdown class="inline-flex" />
           <Link
             v-if="canLogin"
             :href="route('login')"
-            class="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+            class="ms-4 font-semibold text-sky-400 hover:text-white focus:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-300 px-1 py-0.5"
           >
             Log in
           </Link>
           <Link
             v-if="canRegister"
             :href="route('register')"
-            class="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+            class="ms-4 font-semibold text-sky-400 hover:text-white focus:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-300 px-1 py-0.5"
           >
             Register
           </Link>
@@ -46,7 +42,7 @@ defineProps({
     </div>
   </nav>
 
-  <section>
+  <section class="bg-gray-800 py-8">
     <div class="relative container mx-auto">
       <div class="z-0">
         <video autoplay muted loop class="w-full h-full grayscale">
