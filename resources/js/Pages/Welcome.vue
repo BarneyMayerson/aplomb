@@ -17,12 +17,15 @@ defineProps({
 
   <nav class="bg-gray-800 border-b-2 border-gray-600">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <div
+        v-if="!$page.props.auth.user"
+        class="flex items-center justify-between h-16"
+      >
         <div>
           <AppLogo class="block h-9 w-auto" />
         </div>
 
-        <div v-if="!$page.props.auth.user" class="flex items-center">
+        <div class="flex items-center">
           <Link
             v-if="canLogin"
             :href="route('login')"
