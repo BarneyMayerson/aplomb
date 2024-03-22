@@ -45,3 +45,5 @@ Route::middleware([
         return redirect(route("dashboard"))->dangerBanner("No way!");
     });
 });
+
+require __DIR__ . "/User/cabinet.php";
