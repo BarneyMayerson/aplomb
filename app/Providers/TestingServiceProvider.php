@@ -29,6 +29,7 @@ class TestingServiceProvider extends ServiceProvider
             string $component,
             bool $shouldExit = true
         ) {
+            /** @var TestResponse $this */
             return $this->assertInertia(
                 fn(AssertableInertia $inertia) => $inertia->component(
                     $component,

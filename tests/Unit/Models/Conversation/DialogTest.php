@@ -1,39 +1,39 @@
 <?php
 
-use App\Models\Conversation\Dialog;
+use App\Models\Conversation\Dialogue;
 
 it("has an initiator", function () {
-    $dialog = Dialog::factory()->make();
+    $dialogue = Dialogue::factory()->make();
 
-    expect($dialog->initiator)
+    expect($dialogue->initiator)
         ->not()
         ->toBeNull();
 });
 
 it("has an interlocutor", function () {
-    $dialog = Dialog::factory()->make();
+    $dialogue = Dialogue::factory()->make();
 
-    expect($dialog->interlocutor)
+    expect($dialogue->interlocutor)
         ->not()
         ->toBeNull();
 });
 
 it("can be blocked", function () {
-    $dialog = Dialog::factory()->make();
+    $dialogue = Dialogue::factory()->make();
 
-    expect($dialog->blocked)->toBeFalsy();
+    expect($dialogue->blocked)->toBeFalsy();
 
-    $dialog->block();
+    $dialogue->block();
 
-    expect($dialog->blocked)->toBeTruthy();
+    expect($dialogue->blocked)->toBeTruthy();
 });
 
 it("can be unblocked", function () {
-    $dialog = Dialog::factory()->blocked()->make();
+    $dialogue = Dialogue::factory()->blocked()->make();
 
-    expect($dialog->blocked)->toBeTruthy();
+    expect($dialogue->blocked)->toBeTruthy();
 
-    $dialog->unblock();
+    $dialogue->unblock();
 
-    expect($dialog->blocked)->toBeFalsy();
+    expect($dialogue->blocked)->toBeFalsy();
 });
