@@ -9,8 +9,12 @@ it("requires authentication", function () {
     get(route("cabinet.index"))->assertRedirect("/login");
 });
 
-it("returns the cabinet dashboard component", function () {
-    actingAs(User::factory()->create())
-        ->get(route("cabinet.index"))
-        ->assertOk();
-});
+it(
+    "returns the cabinet dashboard component for authenticated user",
+    function () {
+        actingAs(User::factory()->create())
+            ->get(route("cabinet.index"))
+            ->assertOk()
+            ->assertComponent("User/Cabinet/Dashboard");
+    }
+);
