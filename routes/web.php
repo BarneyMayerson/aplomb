@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,3 +48,8 @@ Route::middleware([
 });
 
 require __DIR__ . "/User/cabinet.php";
+
+Route::get(
+    "profile/{user:game_username}",
+    PublicProfileController::class
+)->name("public-profile");
