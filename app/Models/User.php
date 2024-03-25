@@ -52,4 +52,16 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $appends = ["profile_photo_url"];
+
+    /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        return "https://ui-avatars.com/api/?name=" .
+            urlencode($this->game_username) .
+            "&color=7F9CF5&background=EBF4FF";
+    }
 }
