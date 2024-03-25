@@ -10,7 +10,7 @@ import TextInput from "@/Components/TextInput.vue";
 import SlideDialogModal from "@/Components/SlideDialogModal.vue";
 
 const form = useForm({
-  name: "",
+  game_username: "",
   email: "",
   password: "",
   password_confirmation: "",
@@ -39,17 +39,17 @@ const { close } = useModal();
 
       <form @submit.prevent="submit">
         <div>
-          <InputLabel for="name" value="Name" />
+          <InputLabel for="game_username" value="The Game Username" />
           <TextInput
-            id="name"
-            v-model="form.name"
+            id="game_username"
+            v-model="form.game_username"
             type="text"
             class="mt-1 block w-full"
             required
             autofocus
-            autocomplete="name"
+            autocomplete="game_username"
           />
-          <InputError class="mt-2" :message="form.errors.name" />
+          <InputError class="mt-2" :message="form.errors.game_username" />
         </div>
 
         <div class="mt-4">
