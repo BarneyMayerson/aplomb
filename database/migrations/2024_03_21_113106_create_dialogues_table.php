@@ -12,7 +12,15 @@ return new class extends Migration {
     {
         Schema::create("dialogues", function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table
+                ->foreignId("initiator_id")
+                ->constrained("users")
+                ->cascadeOnDelete();
+            $table
+                ->foreignId("interlocutor_id")
+                ->constrained("users")
+                ->cascadeOnDelete();
+            $table->boolean("blocked")->default(false);
         });
     }
 

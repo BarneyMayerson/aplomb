@@ -3,6 +3,7 @@
 namespace App\Models\Conversation;
 
 use App\Models\User;
+use DomainException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Dialogue extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 
     protected $casts = [
         "blocked" => "boolean",
@@ -33,5 +36,30 @@ class Dialogue extends Model
     public function unblock(): void
     {
         $this->blocked = false;
+    }
+
+    /**
+     * @param string $initiator_id
+     * @param string $interlocutor_id
+     * @return Dialogue
+     * @throws DomainException
+     */
+    public static function safetyCreate(
+        string $initiator_id,
+        string $interlocutor_id
+    ): self {
+        // Check if it already exists between those people
+        if (
+            static::where("initiator_id", $interlocutor_id)
+                ->where("interlocutor_id", $initiator_id)
+                ->exists()
+        ) {
+            throw new DomainException("Such a dialogue is already exists.");
+        }
+
+        return static::firstOrCreate([
+            "initiator_id" => $initiator_id,
+            "interlocutor_id" => $interlocutor_id,
+        ]);
     }
 }
