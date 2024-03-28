@@ -65,6 +65,7 @@ const enableDialogue = () =>
             <InputLabel for="message" value="Message" />
             <TextArea
               id="message"
+              rows="3"
               v-model="form.message"
               class="mt-1 block w-full"
             />

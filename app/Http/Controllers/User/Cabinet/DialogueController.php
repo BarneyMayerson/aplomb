@@ -17,6 +17,7 @@ class DialogueController extends Controller
         $request->validate([
             "from" => "required|numeric|different:to|exists:users,id",
             "to" => "required|numeric|exists:users,id",
+            "message" => "required|string|min:2|max:240",
         ]);
 
         $dialogue = Dialogue::safetyCreate($request["from"], $request["to"]);
