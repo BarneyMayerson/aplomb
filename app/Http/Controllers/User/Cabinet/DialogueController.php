@@ -22,6 +22,10 @@ class DialogueController extends Controller
 
         $dialogue = Dialogue::safetyCreate($request["from"], $request["to"]);
 
-        dd($dialogue);
+        $dialogue->addMessage(
+            $request["from"],
+            $request["to"],
+            $request["message"]
+        );
     }
 }

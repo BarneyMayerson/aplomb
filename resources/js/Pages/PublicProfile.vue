@@ -30,7 +30,10 @@ const showMessageForm = () => {
 const submit = () => {
   form.post(route("cabinet.dialogue.store"), {
     preserveScroll: true,
-    onSuccess: form.reset,
+    onSuccess: () => {
+      form.message = "";
+      show.value = false;
+    },
   });
 };
 

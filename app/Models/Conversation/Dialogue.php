@@ -7,6 +7,7 @@ use DomainException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Dialogue extends Model
 {
@@ -26,6 +27,11 @@ class Dialogue extends Model
     public function interlocutor(): BelongsTo
     {
         return $this->belongsTo(User::class, "interlocutor_id");
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
     }
 
     public function block(): void
@@ -61,5 +67,10 @@ class Dialogue extends Model
             "initiator_id" => $initiator_id,
             "interlocutor_id" => $interlocutor_id,
         ]);
+    }
+
+    public function addMessage(int $userId, int $recieverId, string $text): void
+    {
+        Message::add($this->id, $userId, $recieverId, $text);
     }
 }
