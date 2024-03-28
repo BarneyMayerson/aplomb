@@ -53,11 +53,9 @@ onUnmounted(() => {
       <TransitionChild
         @after-leave="redirect"
         as="template"
-        enter="duration-1000 ease-out"
+        enter="duration-500 ease-out"
         enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-1000 ease-in"
-        leave-from="opacity-100"
+        leave="duration-500 ease-in"
         leave-to="opacity-0"
       >
         <div
@@ -71,10 +69,10 @@ onUnmounted(() => {
         >
           <TransitionChild
             as="template"
-            enter="duration-1000 ease-out"
+            enter="duration-500 ease-out"
             enter-from="opacity-0 -translate-y-full"
             enter-to="translate-0"
-            leave="duration-1000 ease-in"
+            leave="duration-500 ease-in"
             leave-from="translate-0"
             leave-to="opacity-0 -translate-y-full"
           >
