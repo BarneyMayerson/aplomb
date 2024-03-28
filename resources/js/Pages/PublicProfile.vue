@@ -3,7 +3,7 @@ import { useForm, usePage } from "@inertiajs/vue3";
 import { useModal } from "momentum-modal";
 import PageTitle from "@/Components/PageTitle.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
+import TextArea from "@/Components/TextArea.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
@@ -63,12 +63,10 @@ const enableDialogue = () =>
           </p>
           <form @submit.prevent="submit" class="mt-6">
             <InputLabel for="message" value="Message" />
-            <TextInput
+            <TextArea
               id="message"
               v-model="form.message"
-              type="text"
               class="mt-1 block w-full"
-              required
             />
             <InputError :message="form.errors.message" class="mt-2" />
             <InputError :message="form.errors.from" class="mt-2" />
