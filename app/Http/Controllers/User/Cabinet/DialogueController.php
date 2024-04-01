@@ -3,11 +3,23 @@
 namespace App\Http\Controllers\User\Cabinet;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Conversation\DialogueResource;
 use App\Models\Conversation\Dialogue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class DialogueController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render("User/Cabinet/Dialogues/Index", [
+            "dialogues" => DialogueResource::collection(
+                Dialogue::allByUser(Auth::id())
+            ),
+        ]);
+    }
+
     public function store(Request $request): void
     {
         if (empty($request->message)) {

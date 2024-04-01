@@ -4,6 +4,7 @@ namespace App\Models\Conversation;
 
 use App\Models\User;
 use DomainException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,6 +43,14 @@ class Dialogue extends Model
     public function unblock(): void
     {
         $this->blocked = false;
+    }
+
+    public static function allByUser(int $userId): Collection
+    {
+        return Dialogue::where("initiator_id", $userId)
+            ->orWhere("interlocutor_id", $userId)
+            ->with(["initiator", "interlocutor"])
+            ->get();
     }
 
     /**

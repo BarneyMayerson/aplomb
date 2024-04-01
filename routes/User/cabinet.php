@@ -16,10 +16,13 @@ Route::group(
         // dialogue
         Route::group(
             [
-                "prefix" => "dialogue",
-                "as" => "dialogue.",
+                "prefix" => "dialogues",
+                "as" => "dialogues.",
             ],
             function () {
+                Route::get("", [DialogueController::class, "index"])->name(
+                    "index"
+                );
                 Route::post("", [DialogueController::class, "store"])->name(
                     "store"
                 );

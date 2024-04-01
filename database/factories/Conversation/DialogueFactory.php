@@ -20,6 +20,7 @@ class DialogueFactory extends Factory
         return [
             "initiator_id" => User::factory(),
             "interlocutor_id" => User::factory(),
+            "blocked" => false,
         ];
     }
 

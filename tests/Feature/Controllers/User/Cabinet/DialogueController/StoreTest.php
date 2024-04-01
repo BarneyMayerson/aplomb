@@ -20,14 +20,14 @@ beforeEach(function () {
 });
 
 it("requires authentication", function () {
-    post(route("cabinet.dialogue.store"))->assertRedirect(route("login"));
+    post(route("cabinet.dialogues.store"))->assertRedirect(route("login"));
 });
 
 it(
     "store a dialog in which the authenticated user starts a conversation with another",
     function () {
         actingAs($this->initiator)->post(
-            route("cabinet.dialogue.store", $this->validData)
+            route("cabinet.dialogues.store", $this->validData)
         );
 
         assertDatabaseHas(Dialogue::class, [
@@ -39,7 +39,7 @@ it(
 
 it("requires a valid data", function (array $badData, array|string $errors) {
     actingAs($this->initiator)
-        ->post(route("cabinet.dialogue.store"), [
+        ->post(route("cabinet.dialogues.store"), [
             ...$this->validData,
             ...$badData,
         ])
@@ -59,7 +59,7 @@ it(
     "doesn't create a new dialog between the interlocutor and the previous initiator",
     function () {
         actingAs($this->initiator)->post(
-            route("cabinet.dialogue.store", $this->validData)
+            route("cabinet.dialogues.store", $this->validData)
         );
 
         assertDatabaseHas(Dialogue::class, [
@@ -68,7 +68,7 @@ it(
         ]);
 
         actingAs($this->interlocutor)->post(
-            route("cabinet.dialogue.store", [
+            route("cabinet.dialogues.store", [
                 "from" => $this->interlocutor->id,
                 "to" => $this->initiator->id,
                 "message" => "Hi there!",
