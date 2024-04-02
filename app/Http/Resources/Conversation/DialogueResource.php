@@ -22,6 +22,9 @@ class DialogueResource extends JsonResource
                 $this->whenLoaded("interlocutor")
             ),
             "blocked" => $this->blocked,
+            "can" => [
+                "view" => $request->user()?->can("view", $this->resource),
+            ],
         ];
     }
 }

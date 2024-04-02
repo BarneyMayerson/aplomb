@@ -22,9 +22,7 @@ class DialogueController extends Controller
 
     public function show(Dialogue $dialogue)
     {
-        if (!$dialogue->isMember(Auth::id())) {
-            abort(403);
-        }
+        $this->authorize("view", $dialogue);
 
         return Inertia::render("User/Cabinet/Dialogues/Show", [
             "dialogue" => DialogueResource::make($dialogue),
