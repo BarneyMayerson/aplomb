@@ -23,6 +23,10 @@ Route::group(
                 Route::get("", [DialogueController::class, "index"])->name(
                     "index"
                 );
+                Route::get("/{dialogue}", [
+                    DialogueController::class,
+                    "show",
+                ])->name("show");
                 Route::post("", [DialogueController::class, "store"])->name(
                     "store"
                 );

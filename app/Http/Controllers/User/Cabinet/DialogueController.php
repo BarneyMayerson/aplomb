@@ -20,6 +20,17 @@ class DialogueController extends Controller
         ]);
     }
 
+    public function show(Dialogue $dialogue)
+    {
+        if (!$dialogue->isMember(Auth::id())) {
+            abort(403);
+        }
+
+        return Inertia::render("User/Cabinet/Dialogues/Show", [
+            "dialogue" => DialogueResource::make($dialogue),
+        ]);
+    }
+
     public function store(Request $request): void
     {
         if (empty($request->message)) {

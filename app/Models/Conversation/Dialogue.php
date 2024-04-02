@@ -30,6 +30,12 @@ class Dialogue extends Model
         return $this->belongsTo(User::class, "interlocutor_id");
     }
 
+    public function isMember(int $userId): bool
+    {
+        return $this->initiator->id === $userId ||
+            $this->interlocutor->id === $userId;
+    }
+
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class);

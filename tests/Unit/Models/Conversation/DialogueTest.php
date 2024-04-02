@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Conversation\Dialogue;
+use App\Models\User;
 
 it("has an initiator", function () {
     $dialogue = Dialogue::factory()->make();
@@ -36,4 +37,14 @@ it("can be unblocked", function () {
     $dialogue->unblock();
 
     expect($dialogue->blocked)->toBeFalsy();
+});
+
+it("can detemine whether a user is the member", function () {
+    $dialogue = Dialogue::factory()->make();
+
+    $user = User::factory()->create();
+
+    expect($dialogue->isMember($user->id))->toBeFalsy();
+    expect($dialogue->isMember($dialogue->initiator->id))->toBeTruthy();
+    expect($dialogue->isMember($dialogue->interlocutor->id))->toBeTruthy();
 });

@@ -8,11 +8,11 @@ import {
   PlusIcon,
 } from "@heroicons/vue/24/outline";
 
-const props = defineProps(["dialogues"]);
+const props = defineProps(["dialogue"]);
 </script>
 
 <template>
-  <Head title="Your Dialogues" id="head" />
+  <Head title="Dialogue" id="head" />
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div
       class="divide-y divide-x-0 md:grid md:grid-cols-7 md:divide-x md:divide-y-0 divide-gray-300 dark:divide-gray-600"
@@ -60,26 +60,7 @@ const props = defineProps(["dialogues"]);
         </div>
       </div>
       <div class="col-span-6">
-        <div class="px-4 py-8">
-          <div
-            class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-3"
-          >
-            <div
-              v-for="dialogue in dialogues"
-              class="px-3 py-1 rounded-lg border flex flex-col gap-y-1 hover:bg-gray-200 dark:hover:bg-gray-800"
-            >
-              <Link :href="route('cabinet.dialogues.show', dialogue.id)">
-                <span>{{ dialogue.initiator.game_username }}</span>
-                <span class="flex justify-center">
-                  <PlusIcon class="h-5 w-5" aria-hidden="true" />
-                </span>
-                <span class="flex justify-end">
-                  {{ dialogue.interlocutor.game_username }}
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <div class="px-4 py-8">Here is the dialogue messages</div>
       </div>
     </div>
   </div>
