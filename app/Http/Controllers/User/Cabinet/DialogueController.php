@@ -31,10 +31,6 @@ class DialogueController extends Controller
 
     public function store(Request $request): void
     {
-        if (empty($request->message)) {
-            return;
-        }
-
         $request->validate([
             "from" => "required|numeric|different:to|exists:users,id",
             "to" => "required|numeric|exists:users,id",

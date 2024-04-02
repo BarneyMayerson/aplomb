@@ -28,7 +28,7 @@ const showMessageForm = () => {
 };
 
 const submit = () => {
-  form.post(route("cabinet.dialogue.store"), {
+  form.post(route("cabinet.dialogues.store"), {
     preserveScroll: true,
     onSuccess: () => {
       form.message = "";
@@ -71,6 +71,7 @@ const enableDialogue = () =>
               rows="3"
               v-model="form.message"
               class="mt-1 block w-full"
+              required
             />
             <InputError :message="form.errors.message" class="mt-2" />
             <InputError :message="form.errors.from" class="mt-2" />
