@@ -17,6 +17,11 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function receiver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, "receiver_id");
+    }
+
     public function dialogue(): BelongsTo
     {
         return $this->belongsTo(Dialogue::class);

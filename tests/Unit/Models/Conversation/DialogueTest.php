@@ -3,6 +3,8 @@
 use App\Models\Conversation\Dialogue;
 use App\Models\User;
 
+use function Pest\Laravel\actingAs;
+
 it("has an initiator", function () {
     $dialogue = Dialogue::factory()->make();
 
@@ -47,4 +49,22 @@ it("can detemine whether a user is the member", function () {
     expect($dialogue->isMember($user->id))->toBeFalsy();
     expect($dialogue->isMember($dialogue->initiator->id))->toBeTruthy();
     expect($dialogue->isMember($dialogue->interlocutor->id))->toBeTruthy();
+});
+
+it("can determine the partner for the authenticated user", function () {
+    $dialogue = Dialogue::factory()->make();
+
+    expect($dialogue->partner())->toBeNull();
+
+    actingAs($dialogue->initiator);
+
+    expect($dialogue->partner())->toEqual($dialogue->interlocutor);
+
+    actingAs($dialogue->interlocutor);
+
+    expect($dialogue->partner())->toEqual($dialogue->initiator);
+
+    actingAs(User::factory()->create());
+
+    expect($dialogue->partner())->toBeNull();
 });

@@ -22,6 +22,13 @@ class DialogueResource extends JsonResource
                 $this->whenLoaded("interlocutor")
             ),
             "blocked" => $this->blocked,
+            "partner" => UserResource::make($this->partner()),
+            "messages" => MessageResource::collection(
+                $this->messages()
+                    ->latest()
+                    ->with(["user", "receiver"])
+                    ->get()
+            ),
             "can" => [
                 "view" => $request->user()?->can("view", $this->resource),
             ],

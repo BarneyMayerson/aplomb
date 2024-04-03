@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Null_;
 
 class Dialogue extends Model
 {
@@ -34,6 +36,21 @@ class Dialogue extends Model
     {
         return $this->initiator->id === $userId ||
             $this->interlocutor->id === $userId;
+    }
+
+    public function partner(): ?User
+    {
+        if (Auth::guest()) {
+            return null;
+        }
+
+        if (!$this->isMember(Auth::id())) {
+            return null;
+        }
+
+        return Auth::id() === $this->initiator_id
+            ? $this->interlocutor
+            : $this->initiator;
     }
 
     public function messages(): HasMany
