@@ -28,7 +28,7 @@ const props = defineProps(["dialogue"]);
             <div class="w-full space-y-2">
               <div
                 v-if="message.to === dialogue.partner.game_username"
-                class="mb-3 w-5/6 bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2"
+                class="mb-3 w-5/6 float-right bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2"
               >
                 {{ message.text }}
                 <span
@@ -39,7 +39,7 @@ const props = defineProps(["dialogue"]);
               </div>
               <div
                 v-else
-                class="mb-3 w-5/6 float-right bg-stone-100 dark:bg-stone-950 border border-stone-300 dark:border-stone-800 rounded-lg px-4 py-2"
+                class="mb-3 w-5/6 bg-stone-100 dark:bg-stone-950 border border-stone-300 dark:border-stone-800 rounded-lg px-4 py-2"
               >
                 {{ message.text }}
                 <span
