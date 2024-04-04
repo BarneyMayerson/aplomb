@@ -81,3 +81,9 @@ it(
         ]);
     }
 );
+
+it("redirects to the cabinet dialogues show page", function () {
+    actingAs($this->initiator)
+        ->post(route("cabinet.dialogues.store", $this->validData))
+        ->assertRedirect(route("cabinet.dialogues.show", 1));
+});

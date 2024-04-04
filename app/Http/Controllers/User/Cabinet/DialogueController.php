@@ -29,7 +29,7 @@ class DialogueController extends Controller
         ]);
     }
 
-    public function store(Request $request): void
+    public function store(Request $request)
     {
         $request->validate([
             "from" => "required|numeric|different:to|exists:users,id",
@@ -37,12 +37,14 @@ class DialogueController extends Controller
             "message" => "required|string|min:2|max:240",
         ]);
 
-        $dialogue = Dialogue::safetyCreate($request["from"], $request["to"]);
+        $dialogue = Dialogue::findOrCreate($request["from"], $request["to"]);
 
         $dialogue->addMessage(
             $request["from"],
             $request["to"],
             $request["message"]
         );
+
+        return to_route("cabinet.dialogues.show", $dialogue);
     }
 }

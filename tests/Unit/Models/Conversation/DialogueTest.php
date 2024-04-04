@@ -2,6 +2,7 @@
 
 use App\Models\Conversation\Dialogue;
 use App\Models\User;
+use PhpParser\Node\Expr\BinaryOp\Equal;
 
 use function Pest\Laravel\actingAs;
 
@@ -67,4 +68,16 @@ it("can determine the partner for the authenticated user", function () {
     actingAs(User::factory()->create());
 
     expect($dialogue->partner())->toBeNull();
+});
+
+it("can find a dialogue between two persons", function () {
+    $dialogue = Dialogue::factory()->create();
+
+    $initiator = $dialogue->initiator;
+    $interlocutor = $dialogue->interlocutor;
+
+    // swap them
+    $newDialog = Dialogue::findOrCreate($interlocutor->id, $initiator->id);
+
+    expect($newDialog->id)->toEqual($dialogue->id);
 });

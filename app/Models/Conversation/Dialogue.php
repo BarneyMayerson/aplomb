@@ -82,7 +82,7 @@ class Dialogue extends Model
      * @return Dialogue
      * @throws DomainException
      */
-    public static function safetyCreate(
+    public static function findOrCreate(
         string $initiator_id,
         string $interlocutor_id
     ): self {
@@ -92,7 +92,9 @@ class Dialogue extends Model
                 ->where("interlocutor_id", $initiator_id)
                 ->exists()
         ) {
-            throw new DomainException("Such a dialogue is already exists.");
+            return static::where("initiator_id", $interlocutor_id)
+                ->where("interlocutor_id", $initiator_id)
+                ->first();
         }
 
         return static::firstOrCreate([
