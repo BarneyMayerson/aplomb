@@ -30,6 +30,10 @@ Route::group(
                 Route::post("", [DialogueController::class, "store"])->name(
                     "store"
                 );
+                Route::post("/{dialogue}", [
+                    DialogueController::class,
+                    "addMessage",
+                ])->name("show.add-message");
             }
         );
     }

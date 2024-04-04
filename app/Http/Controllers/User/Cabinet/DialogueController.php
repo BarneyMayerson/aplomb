@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+use function Pest\Laravel\from;
+
 class DialogueController extends Controller
 {
     public function index()
@@ -46,5 +48,18 @@ class DialogueController extends Controller
         );
 
         return to_route("cabinet.dialogues.show", $dialogue);
+    }
+
+    public function addMessage(Request $request, Dialogue $dialogue)
+    {
+        $request->validate([
+            "text" => "required|string|max:240",
+        ]);
+
+        $dialogue->addMessage(
+            userId: Auth::id(),
+            recieverId: $dialogue->partner()->id,
+            text: $request->text
+        );
     }
 }
