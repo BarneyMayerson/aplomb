@@ -5,15 +5,15 @@ namespace App\Http\Controllers\User\Cabinet;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Conversation\DialogueResource;
 use App\Models\Conversation\Dialogue;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-
-use function Pest\Laravel\from;
+use Inertia\Response;
 
 class DialogueController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         return Inertia::render("User/Cabinet/Dialogues/Index", [
             "dialogues" => DialogueResource::collection(
@@ -22,7 +22,7 @@ class DialogueController extends Controller
         ]);
     }
 
-    public function show(Dialogue $dialogue)
+    public function show(Dialogue $dialogue): Response
     {
         $this->authorize("view", $dialogue);
 
@@ -31,7 +31,7 @@ class DialogueController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             "from" => "required|numeric|different:to|exists:users,id",
@@ -50,7 +50,7 @@ class DialogueController extends Controller
         return to_route("cabinet.dialogues.show", $dialogue);
     }
 
-    public function addMessage(Request $request, Dialogue $dialogue)
+    public function addMessage(Request $request, Dialogue $dialogue): void
     {
         $request->validate([
             "text" => "required|string|max:240",
