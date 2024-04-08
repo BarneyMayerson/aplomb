@@ -8,6 +8,10 @@ import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import ThemeDropdown from "@/Components/ThemeDropdown.vue";
 
+const props = defineProps({
+  hasAuthUser: Boolean,
+});
+
 const showingNavigationDropdown = ref(false);
 
 const logout = () => {
@@ -21,7 +25,7 @@ const logout = () => {
   >
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
+      <div class="flex justify-between h-16 items-center">
         <div class="flex">
           <!-- Logo -->
           <div class="shrink-0 flex items-center">
@@ -45,117 +49,124 @@ const logout = () => {
           </div>
         </div>
 
-        <div class="hidden sm:flex sm:items-center sm:ms-6">
-          <!-- Themes Dropdown-->
-          <div>
+        <div>
+          <div class="flex items-center">
+            <!-- Themes Dropdown-->
             <ThemeDropdown />
-          </div>
-          <!-- Settings Dropdown -->
-          <div class="ms-6 relative">
-            <Dropdown align="right" width="48">
-              <template #trigger>
-                <button
-                  v-if="$page.props.jetstream.managesProfilePhotos"
-                  class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition"
+            <div v-if="!hasAuthUser">
+              <NavLink :href="route('login')" class="ms-4">Log in</NavLink>
+              <NavLink :href="route('register')" class="ms-4">Register</NavLink>
+            </div>
+            <!-- Hamburger -->
+            <div class="ms-4 -me-2 flex items-center sm:hidden">
+              <button
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                @click="showingNavigationDropdown = !showingNavigationDropdown"
+              >
+                <svg
+                  class="h-6 w-6"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 24 24"
                 >
-                  <img
-                    class="h-8 w-8 rounded-full object-cover"
-                    :src="$page.props.auth.user.profile_photo_url"
-                    :alt="$page.props.auth.user.game_username"
+                  <path
+                    :class="{
+                      hidden: showingNavigationDropdown,
+                      'inline-flex': !showingNavigationDropdown,
+                    }"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"
                   />
-                </button>
-
-                <span v-else class="inline-flex rounded-md">
-                  <button
-                    type="button"
-                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
-                  >
-                    {{ $page.props.auth.user.game_username }}
-
-                    <svg
-                      class="ms-2 -me-0.5 h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
+                  <path
+                    :class="{
+                      hidden: !showingNavigationDropdown,
+                      'inline-flex': showingNavigationDropdown,
+                    }"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="hidden sm:flex sm:items-center">
+              <!-- Settings Dropdown -->
+              <div v-if="hasAuthUser" class="ms-6 relative">
+                <Dropdown align="right" width="48">
+                  <template #trigger>
+                    <button
+                      v-if="$page.props.jetstream.managesProfilePhotos"
+                      class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      <img
+                        class="h-8 w-8 rounded-full object-cover"
+                        :src="$page.props.auth.user.profile_photo_url"
+                        :alt="$page.props.auth.user.game_username"
                       />
-                    </svg>
-                  </button>
-                </span>
-              </template>
+                    </button>
 
-              <template #content>
-                <!-- Account Management -->
-                <div class="block px-4 py-2 text-xs text-gray-400">
-                  Manage Account
-                </div>
+                    <span v-else class="inline-flex rounded-md">
+                      <button
+                        type="button"
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
+                      >
+                        {{ $page.props.auth.user.game_username }}
 
-                <DropdownLink :href="route('profile.show')">
-                  Profile
-                </DropdownLink>
+                        <svg
+                          class="ms-2 -me-0.5 h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  </template>
 
-                <DropdownLink :href="route('cabinet.index')">
-                  Cabinet
-                </DropdownLink>
+                  <template #content>
+                    <!-- Account Management -->
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                      Manage Account
+                    </div>
 
-                <DropdownLink
-                  v-if="$page.props.jetstream.hasApiFeatures"
-                  :href="route('api-tokens.index')"
-                >
-                  API Tokens
-                </DropdownLink>
+                    <DropdownLink :href="route('profile.show')">
+                      Profile
+                    </DropdownLink>
 
-                <div class="border-t border-gray-200 dark:border-gray-600" />
+                    <DropdownLink :href="route('cabinet.index')">
+                      Cabinet
+                    </DropdownLink>
 
-                <!-- Authentication -->
-                <form @submit.prevent="logout">
-                  <DropdownLink as="button"> Log Out </DropdownLink>
-                </form>
-              </template>
-            </Dropdown>
+                    <DropdownLink
+                      v-if="$page.props.jetstream.hasApiFeatures"
+                      :href="route('api-tokens.index')"
+                    >
+                      API Tokens
+                    </DropdownLink>
+
+                    <div
+                      class="border-t border-gray-200 dark:border-gray-600"
+                    />
+
+                    <!-- Authentication -->
+                    <form @submit.prevent="logout">
+                      <DropdownLink as="button"> Log Out </DropdownLink>
+                    </form>
+                  </template>
+                </Dropdown>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <!-- Hamburger -->
-        <div class="-me-2 flex items-center sm:hidden">
-          <button
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
-            @click="showingNavigationDropdown = !showingNavigationDropdown"
-          >
-            <svg
-              class="h-6 w-6"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                :class="{
-                  hidden: showingNavigationDropdown,
-                  'inline-flex': !showingNavigationDropdown,
-                }"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-              <path
-                :class="{
-                  hidden: !showingNavigationDropdown,
-                  'inline-flex': showingNavigationDropdown,
-                }"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </div>
@@ -170,15 +181,25 @@ const logout = () => {
     >
       <div class="pt-2 pb-3 space-y-1">
         <ResponsiveNavLink
+          v-if="hasAuthUser"
           :href="route('dashboard')"
           :active="route().current('dashboard')"
         >
           Dashboard
         </ResponsiveNavLink>
+        <ResponsiveNavLink
+          :href="route('grid')"
+          :active="route().current('grid')"
+        >
+          Grid
+        </ResponsiveNavLink>
       </div>
 
       <!-- Responsive Settings Options -->
-      <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+      <div
+        v-if="hasAuthUser"
+        class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600"
+      >
         <div class="flex items-center px-4">
           <div
             v-if="$page.props.jetstream.managesProfilePhotos"

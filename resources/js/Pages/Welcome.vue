@@ -15,36 +15,6 @@ defineProps({
 <template>
   <Head title="Welcome" />
 
-  <nav class="bg-gray-800 border-b-2 border-gray-600">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div
-        v-if="!$page.props.auth.user"
-        class="flex items-center justify-between h-16"
-      >
-        <div>
-          <AppLogo class="block h-9 w-auto" />
-        </div>
-
-        <div class="flex items-center">
-          <Link
-            v-if="canLogin"
-            :href="route('login')"
-            class="ms-4 font-semibold text-sky-400 hover:text-white focus:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-300 px-1 py-0.5"
-          >
-            Log in
-          </Link>
-          <Link
-            v-if="canRegister"
-            :href="route('register')"
-            class="ms-4 font-semibold text-sky-400 hover:text-white focus:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-300 px-1 py-0.5"
-          >
-            Register
-          </Link>
-        </div>
-      </div>
-    </div>
-  </nav>
-
   <section class="bg-gray-800 py-8">
     <div class="relative container mx-auto">
       <div class="z-0">

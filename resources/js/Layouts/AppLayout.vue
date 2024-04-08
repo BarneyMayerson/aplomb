@@ -6,7 +6,8 @@ import PrimaryMenu from "@/Navs/PrimaryMenu.vue";
 
 <template>
   <Banner />
-  <PrimaryMenu v-if="$page.props.auth.user" />
+  <!-- <PrimaryMenu v-if="$page.props.auth.user" /> -->
+  <PrimaryMenu :has-auth-user="!!$page.props.auth.user" />
 
   <div class="min-h-screen">
     <main>
