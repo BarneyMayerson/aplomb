@@ -10,6 +10,7 @@ import ThemeDropdown from "@/Components/ThemeDropdown.vue";
 
 const props = defineProps({
   hasAuthUser: Boolean,
+  currentRoute: String,
 });
 
 const showingNavigationDropdown = ref(false);
@@ -38,12 +39,12 @@ const logout = () => {
           <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
             <NavLink
               :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              :active="currentRoute === 'dashboard'"
             >
               Dashboard
             </NavLink>
 
-            <NavLink :href="route('grid')" :active="route().current('grid')">
+            <NavLink :href="route('grid')" :active="currentRoute === 'grid'">
               Grid
             </NavLink>
           </div>
