@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\User\Cabinet\DialogueController;
 use App\Http\Controllers\User\Cabinet\CabinetController;
+use App\Http\Controllers\User\Cabinet\DialogueController;
+use App\Http\Controllers\User\Cabinet\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -36,5 +37,11 @@ Route::group(
                 ])->name("show.add-message");
             }
         );
+
+        // post
+        Route::group(["prefix" => "posts", "as" => "posts."], function () {
+            Route::post("", [PostController::class, "store"])->name("store");
+            Route::get("{post}", [PostController::class, "show"])->name("show");
+        });
     }
 );
