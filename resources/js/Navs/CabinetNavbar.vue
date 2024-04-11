@@ -33,7 +33,10 @@ import NavbarItem from "@/Navs/NavbarItem.vue";
           </div>
         </NavbarItem>
 
-        <NavbarItem href="#">
+        <NavbarItem
+          :href="route('cabinet.posts.index')"
+          :active="route().current('cabinet.posts.*')"
+        >
           <div class="flex items-center gap-x-2">
             <ClipboardDocumentListIcon
               class="h-5 w-5 shrink-0"

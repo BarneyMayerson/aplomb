@@ -40,6 +40,7 @@ Route::group(
 
         // post
         Route::group(["prefix" => "posts", "as" => "posts."], function () {
+            Route::get("", [PostController::class, "index"])->name("index");
             Route::post("", [PostController::class, "store"])->name("store");
             Route::get("{post}", [PostController::class, "show"])->name("show");
         });

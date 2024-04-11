@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -14,7 +16,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render("User/Cabinet/Posts/Index", [
+            "posts" => PostResource::collection(
+                Auth()
+                    ->user()
+                    ->posts()
+                    ->with(["user"])
+                    ->latest()
+                    ->latest("id")
+                    ->paginate(12)
+            ),
+        ]);
     }
 
     /**
