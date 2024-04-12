@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -51,12 +52,11 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-        // $post->load("user");
+        abort_unless(Auth::id() === $post->id, Response::HTTP_FORBIDDEN);
 
-        // return Inertia::render("Cabinet/Posts/Show", [
-        //     "post" => PostResource::make($post),
-        // ]);
+        return Inertia::render("User/Cabinet/Posts/Show", [
+            "post" => PostResource::make($post),
+        ]);
     }
 
     /**

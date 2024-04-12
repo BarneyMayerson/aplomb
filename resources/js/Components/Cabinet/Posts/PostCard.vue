@@ -24,7 +24,7 @@ defineProps({
     </div>
     <div class="mt-2 flex space-x-2 justify-end">
       <Link
-        href="#"
+        :href="route('cabinet.posts.show', post.id)"
         class="p-2 rounded-md dark:text-gray-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition ease-in-out duration-150"
         title="Preview"
       >
