@@ -18,13 +18,7 @@ class PostController extends Controller
     {
         return Inertia::render("User/Cabinet/Posts/Index", [
             "posts" => PostResource::collection(
-                Auth()
-                    ->user()
-                    ->posts()
-                    ->with(["user"])
-                    ->latest()
-                    ->latest("id")
-                    ->paginate(12)
+                Auth()->user()->posts()->latest()->latest("id")->paginate(12)
             ),
         ]);
     }
