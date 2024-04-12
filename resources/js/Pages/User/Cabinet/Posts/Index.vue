@@ -3,11 +3,13 @@ import { Head, Link } from "@inertiajs/vue3";
 import { computed } from "vue";
 import CabinetNavbar from "@/Navs/CabinetNavbar.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps(["posts"]);
 
 const hasPosts = computed(() => !!props.posts.data.length);
+const showPagination = computed(() => props.posts.meta.last_page > 1);
 </script>
 
 <template>
@@ -26,7 +28,7 @@ const hasPosts = computed(() => !!props.posts.data.length);
 
           <!-- Posts -->
           <div
-            class="mt-8 grid gap-4 grid-cols-1 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl-gap-8"
+            class="mt-8 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:grid-cols-3 xl-gap-8"
           >
             <div
               v-for="post in posts.data"
@@ -35,16 +37,19 @@ const hasPosts = computed(() => !!props.posts.data.length);
             >
               <div>
                 <p class="font-bold">{{ post.title }}</p>
-                <p class="text-xs">{{ post.id }}</p>
               </div>
-              <div class="flex justify-end space-x-2">
+              <div class="flex justify-end space-x-2 w-full">
+                <PrimaryButton v-if="!post.published_at">
+                  Publish
+                </PrimaryButton>
+                <DangerButton v-if="!post.published_at">Delete</DangerButton>
                 <PrimaryButton>Preview</PrimaryButton>
                 <PrimaryButton>Edit</PrimaryButton>
               </div>
             </div>
           </div>
 
-          <Pagination class="mt-4" :meta="posts.meta" />
+          <Pagination v-if="showPagination" class="mt-4" :meta="posts.meta" />
         </div>
         <div v-else>
           You don't have any posts yet. You can start creating a new one right
