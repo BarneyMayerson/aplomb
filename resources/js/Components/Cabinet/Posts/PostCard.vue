@@ -1,5 +1,7 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import { computed } from "vue";
+import { formatDistance, parseISO } from "date-fns";
 import {
   EyeIcon,
   PencilIcon,
@@ -7,12 +9,16 @@ import {
   BookOpenIcon,
 } from "@heroicons/vue/24/outline";
 
-defineProps({
+const props = defineProps({
   post: {
     type: Object,
     required: true,
   },
 });
+
+const formattedDate = computed(() =>
+  formatDistance(parseISO(props.post.created_at), new Date()),
+);
 </script>
 
 <template>
@@ -21,6 +27,7 @@ defineProps({
   >
     <div>
       <p class="font-bold">{{ post.title }}</p>
+      <span class="block text-sm">{{ formattedDate }}</span>
     </div>
     <div class="mt-2 flex space-x-2 justify-end">
       <Link

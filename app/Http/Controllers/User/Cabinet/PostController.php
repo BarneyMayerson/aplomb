@@ -52,7 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        abort_unless(Auth::id() === $post->id, Response::HTTP_FORBIDDEN);
+        abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
         return Inertia::render("User/Cabinet/Posts/Show", [
             "post" => PostResource::make($post),

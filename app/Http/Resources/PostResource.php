@@ -22,10 +22,8 @@ class PostResource extends JsonResource
             ),
             "title" => $this->title,
             "body" => $this->body,
-            "created_at" => $this->created_at->toDateTimeString(),
-            "published_at" => $this->published_at
-                ? $this->published_at->toDateTimeString()
-                : null,
+            "created_at" => $this->created_at,
+            "published_at" => $this->published_at ?? null,
         ];
     }
 }

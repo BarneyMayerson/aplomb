@@ -21,8 +21,6 @@ it("passes posts to the view", function () {
         "user_id" => $user->id,
     ]);
 
-    $posts->load(["user"]);
-
     actingAs($user)
         ->get(route("cabinet.posts.index"))
         ->assertHasPaginatedResource(

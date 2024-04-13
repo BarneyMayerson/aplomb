@@ -1,14 +1,22 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, usePage } from "@inertiajs/vue3";
+import { formatDistance, parseISO } from "date-fns";
 import CabinetNavbar from "@/Navs/CabinetNavbar.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   post: {
     type: Object,
     required: true,
   },
 });
+
+const formattedDate = computed(() =>
+  formatDistance(parseISO(props.post.created_at), new Date()),
+);
+
+const author = computed(() => usePage().props.auth.user?.game_username);
 </script>
 
 <template>
@@ -17,12 +25,18 @@ defineProps({
     <div class="md:grid md:grid-cols-[180px_auto]">
       <CabinetNavbar class="py-2 md:py-6" />
       <div class="px-4 py-8">
-        <div class="flex items-center justify-between">
-          <h2 class="font-semibold text-2xl">{{ post.title }}</h2>
+        <div class="flex justify-between">
+          <div>
+            <h1 class="font-bold text-2xl">{{ post.title }}</h1>
+            <span class="block mt-1 text-sm">
+              {{ formattedDate }} ago by {{ author }}
+            </span>
+          </div>
           <Link :href="route('cabinet.posts.index')">
             <PrimaryButton>All Posts</PrimaryButton>
           </Link>
         </div>
+        <article class="mt-6">{{ post.body }}</article>
       </div>
     </div>
   </div>
