@@ -17,6 +17,7 @@
     "@vue/test-utils": "^2.4.5",
     "autoprefixer": "^10.4.7",
     "axios": "^1.6.4",
+    "date-fns": "^3.6.0",
     "jsdom": "^24.0.0",
     "laravel-vite-plugin": "^1.0.0",
     "momentum-modal": "^0.2.1",
