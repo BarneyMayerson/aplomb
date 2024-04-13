@@ -36,7 +36,9 @@ const author = computed(() => usePage().props.auth.user?.game_username);
             <PrimaryButton>All Posts</PrimaryButton>
           </Link>
         </div>
-        <article class="mt-6">{{ post.body }}</article>
+        <article class="mt-6 text-lg xl:text-xl">
+          <pre class="whitespace-pre-wrap font-sans">{{ post.body }}</pre>
+        </article>
       </div>
     </div>
   </div>
