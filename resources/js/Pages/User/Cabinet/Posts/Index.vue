@@ -20,7 +20,7 @@ const showPagination = computed(() => props.posts.meta.last_page > 1);
       <div class="px-4 py-8">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-semibold">Your posts.</h3>
-          <Link href="#">
+          <Link :href="route('cabinet.posts.create')">
             <PrimaryButton>Create</PrimaryButton>
           </Link>
         </div>
