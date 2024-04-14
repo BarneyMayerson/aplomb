@@ -1,6 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
-import AppLogo from "@/Components/AppLogo.vue";
+import { Head } from "@inertiajs/vue3";
 import LikeGameMenuItem from "@/Components/NFSUBrandTrivia/LikeGameMenuItem.vue";
 import SpinCircle from "@/Components/NFSUBrandTrivia/SpinCircle.vue";
 
@@ -15,7 +14,7 @@ defineProps({
 <template>
   <Head title="Welcome" />
 
-  <section class="bg-gray-800 py-8">
+  <section class="container mx-auto py-8">
     <div class="relative container mx-auto">
       <div class="z-0">
         <video autoplay muted loop class="w-full h-full grayscale">

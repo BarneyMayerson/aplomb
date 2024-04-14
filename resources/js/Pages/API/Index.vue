@@ -13,7 +13,7 @@ defineProps({
   <PageTitle title="API Tokens" />
 
   <div>
-    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+    <div class="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
       <ApiTokenManager
         :tokens="tokens"
         :available-permissions="availablePermissions"

@@ -6,7 +6,7 @@ import PageTitle from "@/Components/PageTitle.vue";
   <PageTitle title="Grid" />
 
   <div
-    class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-gray-900 dark:text-gray-400"
+    class="container mx-auto px-4 sm:px-6 lg:px-8 text-gray-900 dark:text-gray-400"
   >
     <div class="mt-4">
       <h1 class="text-2xl font-semibold">Here is grid</h1>

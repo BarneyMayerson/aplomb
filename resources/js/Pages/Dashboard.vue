@@ -12,23 +12,19 @@ const showDialogModal = ref(false);
   <PageTitle title="Dashboard" />
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div
-        class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg"
-      >
-        <div class="my-4 sm:px-6 lg:px-8">
-          <div class="flex space-x-3">
-            <SecondaryButton @click="showDialogModal = true">
-              Dialog Modal
-            </SecondaryButton>
+    <div class="container mx-auto sm:px-6 lg:px-8">
+      <div class="my-4">
+        <div class="flex space-x-3">
+          <SecondaryButton @click="showDialogModal = true">
+            Dialog Modal
+          </SecondaryButton>
 
-            <Link href="/modal">
-              <SecondaryButton>Slide Modal</SecondaryButton>
-            </Link>
-          </div>
+          <Link href="/modal">
+            <SecondaryButton>Slide Modal</SecondaryButton>
+          </Link>
         </div>
-        <!-- <Welcome /> -->
       </div>
+      <!-- <Welcome /> -->
     </div>
   </div>
 
