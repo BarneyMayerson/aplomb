@@ -12,6 +12,10 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -72,7 +76,14 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->validate([
+            "title" => "required|string|min:2|max:255",
+            "body" => "required|string|min:2",
+        ]);
+
+        $post->update($data);
+
+        return redirect($post->cabinetShowRoute());
     }
 
     /**
