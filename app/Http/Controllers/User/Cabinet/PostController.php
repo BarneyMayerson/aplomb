@@ -12,10 +12,6 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Post::class);
-    }
     /**
      * Display a listing of the resource.
      */
@@ -68,7 +64,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
+
+        return Inertia::render("User/Cabinet/Posts/Edit", [
+            "post" => $post,
+        ]);
     }
 
     /**
@@ -76,6 +76,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
+
         $data = $request->validate([
             "title" => "required|string|min:2|max:255",
             "body" => "required|string|min:2",

@@ -26,7 +26,12 @@ const formattedDate = computed(() =>
     class="flex flex-col justify-between rounded-lg px-6 py-4 bg-white dark:bg-gray-800 shadow dark:shadow-sky-400"
   >
     <div>
-      <p class="font-bold">{{ post.title }}</p>
+      <Link
+        :href="route('cabinet.posts.show', post.id)"
+        class="hover:underline"
+      >
+        <p class="font-bold">{{ post.title }}</p>
+      </Link>
       <span class="block text-sm">{{ formattedDate }}</span>
     </div>
     <div class="mt-2 flex space-x-2 justify-end">
@@ -38,7 +43,7 @@ const formattedDate = computed(() =>
         <EyeIcon class="w-5 h-5" />
       </Link>
       <Link
-        href="#"
+        :href="route('cabinet.posts.edit', post.id)"
         class="p-2 rounded-md dark:text-gray-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition ease-in-out duration-150"
         title="Edit"
       >

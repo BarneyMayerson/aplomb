@@ -39,6 +39,11 @@ const author = computed(() => usePage().props.auth.user?.game_username);
         <article class="mt-6 text-lg xl:text-xl">
           <pre class="whitespace-pre-wrap font-sans">{{ post.body }}</pre>
         </article>
+        <div class="mt-4">
+          <Link :href="route('cabinet.posts.edit', post.id)">
+            <PrimaryButton>Edit</PrimaryButton>
+          </Link>
+        </div>
       </div>
     </div>
   </div>

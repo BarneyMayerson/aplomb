@@ -7,27 +7,35 @@ import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
-const form = useForm("PostForm", {
-  title: "",
-  body: "",
+const props = defineProps({
+  post: {
+    type: Object,
+    required: true,
+  },
 });
 
-const createPost = () => form.post(route("cabinet.posts.store"));
+const form = useForm("PostForm", {
+  title: props.post.title,
+  body: props.post.body,
+});
+
+const updatePost = () =>
+  form.patch(route("cabinet.posts.update", props.post.id));
 </script>
 
 <template>
-  <Head title="Create a Post" id="head" />
+  <Head title="Edit Post" id="head" />
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="md:grid md:grid-cols-[180px_auto]">
       <CabinetNavbar class="py-2 md:py-6" />
       <div class="px-4 py-8">
         <div class="flex items-center justify-between">
-          <h3 class="text-xl font-semibold">Create a Post</h3>
+          <h3 class="text-xl font-semibold">Edit Post</h3>
           <Link :href="route('cabinet.posts.index')">
             <PrimaryButton>Your Posts</PrimaryButton>
           </Link>
         </div>
-        <form @submit.prevent="createPost" class="mt-8">
+        <form @submit.prevent="updatePost" class="mt-8">
           <div>
             <InputLabel value="Title" for="title" class="sr-only" />
             <TextInput
@@ -45,7 +53,7 @@ const createPost = () => form.post(route("cabinet.posts.store"));
             <InputError :message="form.errors.body" class="mt-1" />
           </div>
           <div class="mt-4">
-            <PrimaryButton type="submint">Create && Preview</PrimaryButton>
+            <PrimaryButton type="submint">Update && Preview</PrimaryButton>
           </div>
         </form>
       </div>

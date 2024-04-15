@@ -46,6 +46,9 @@ Route::group(
             );
             Route::post("", [PostController::class, "store"])->name("store");
             Route::get("{post}", [PostController::class, "show"])->name("show");
+            Route::get("{post}/edit", [PostController::class, "edit"])->name(
+                "edit"
+            );
             Route::patch("{post}", [PostController::class, "update"])->name(
                 "update"
             );
