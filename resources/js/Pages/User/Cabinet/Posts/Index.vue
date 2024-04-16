@@ -5,13 +5,20 @@ import CabinetNavbar from "@/Navs/CabinetNavbar.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Pagination from "@/Components/Pagination.vue";
 import PostCard from "@/Components/Cabinet/Posts/PostCard.vue";
+import { useConfirm } from "@/Composables/useConfirm";
 
 const props = defineProps(["posts"]);
 
 const hasPosts = computed(() => !!props.posts.data.length);
 const showPagination = computed(() => props.posts.meta.last_page > 1);
 
-const deletePost = (postId) => {
+const { confirmation } = useConfirm();
+
+const deletePost = async (postId) => {
+  if (!(await confirmation("Are you sure you want to delete this post?"))) {
+    return;
+  }
+
   router.delete(
     route("cabinet.posts.destroy", {
       post: postId,

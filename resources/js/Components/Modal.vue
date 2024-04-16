@@ -68,10 +68,10 @@ onUnmounted(() => {
         scroll-region
       >
         <transition
-          enter-active-class="ease-out duration-1000"
+          enter-active-class="ease-out duration-300"
           enter-from-class="opacity-0"
           enter-to-class="opacity-100"
-          leave-active-class="ease-in duration-1000"
+          leave-active-class="ease-in duration-300"
           leave-from-class="opacity-100"
           leave-to-class="opacity-0"
         >
@@ -87,10 +87,10 @@ onUnmounted(() => {
         </transition>
 
         <transition
-          enter-active-class="ease-out duration-1000 delay-1000"
+          enter-active-class="ease-out duration-300"
           enter-from-class="opacity-0 translate-y-4 sm:translate-y-full sm:scale-50"
           enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-          leave-active-class="ease-in duration-1000"
+          leave-active-class="ease-in duration-300"
           leave-from-class="opacity-100 translate-y-full sm:scale-100"
           leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-50"
         >

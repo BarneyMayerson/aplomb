@@ -1,6 +1,7 @@
 <script setup>
 import { Modal } from "momentum-modal";
 import Banner from "@/Components/Banner.vue";
+import ConfirmationModalWrapper from "@/Components/ConfirmationModalWrapper.vue";
 import PrimaryMenu from "@/Navs/PrimaryMenu.vue";
 </script>
 
@@ -18,4 +19,5 @@ import PrimaryMenu from "@/Navs/PrimaryMenu.vue";
     </main>
   </div>
   <Modal />
+  <ConfirmationModalWrapper />
 </template>
