@@ -52,6 +52,9 @@ Route::group(
             Route::patch("{post}", [PostController::class, "update"])->name(
                 "update"
             );
+            Route::delete("{post}", [PostController::class, "destroy"])->name(
+                "destroy"
+            );
         });
     }
 );

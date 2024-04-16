@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Cabinet;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -91,8 +92,15 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
-        //
+        abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
+
+        $post->delete();
+
+        return redirect(
+            route("cabinet.posts.index", ["page" => $request->query("page")]),
+            Response::HTTP_PERMANENTLY_REDIRECT
+        );
     }
 }
