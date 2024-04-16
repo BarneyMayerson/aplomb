@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import { computed } from "vue";
 import CabinetNavbar from "@/Navs/CabinetNavbar.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -10,6 +10,18 @@ const props = defineProps(["posts"]);
 
 const hasPosts = computed(() => !!props.posts.data.length);
 const showPagination = computed(() => props.posts.meta.last_page > 1);
+
+const deletePost = (postId) => {
+  router.delete(
+    route("cabinet.posts.destroy", {
+      post: postId,
+      page: props.posts.meta.current_page,
+    }),
+    {
+      preserveScroll: true,
+    },
+  );
+};
 </script>
 
 <template>
@@ -30,7 +42,7 @@ const showPagination = computed(() => props.posts.meta.last_page > 1);
             class="mt-8 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:grid-cols-3 xl-gap-8"
           >
             <template v-for="post in posts.data" :key="post.id">
-              <PostCard :post="post" />
+              <PostCard :post="post" @delete="deletePost" />
             </template>
           </div>
 

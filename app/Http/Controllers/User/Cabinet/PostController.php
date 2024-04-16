@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User\Cabinet;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use Illuminate\Http\Client\Response as ClientResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -98,9 +97,8 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect(
-            route("cabinet.posts.index", ["page" => $request->query("page")]),
-            Response::HTTP_PERMANENTLY_REDIRECT
-        );
+        return to_route("cabinet.posts.index", [
+            "page" => $request->query("page"),
+        ]);
     }
 }

@@ -39,7 +39,7 @@ it(
     }
 );
 
-it("cannon destroy a post from another user", function () {
+it("cannot destroy a post from another user", function () {
     $post = Post::factory()->create();
 
     actingAs(User::factory()->create())

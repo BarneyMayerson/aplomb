@@ -19,6 +19,8 @@ const props = defineProps({
 const formattedDate = computed(() =>
   formatDistance(parseISO(props.post.created_at), new Date()),
 );
+
+const emit = defineEmits(["delete"]);
 </script>
 
 <template>
@@ -49,14 +51,18 @@ const formattedDate = computed(() =>
       >
         <PencilIcon class="w-5 h-5" />
       </Link>
-      <Link
+
+      <form
+        @submit.prevent="$emit('delete', post.id)"
         v-if="!post.published_at"
-        href="#"
-        class="p-2 rounded-md text-red-700 dark:text-red-200 bg-red-100 dark:bg-red-700 hover:bg-red-200 dark:hover:bg-red-600 transition ease-in-out duration-150"
-        title="Delete"
       >
-        <TrashIcon class="w-5 h-5" />
-      </Link>
+        <button
+          class="p-2 rounded-md text-red-700 dark:text-red-200 bg-red-100 dark:bg-red-700 hover:bg-red-200 dark:hover:bg-red-600 transition ease-in-out duration-150"
+        >
+          <TrashIcon class="w-5 h-5" />
+        </button>
+      </form>
+
       <Link
         v-if="!post.published_at"
         href="#"
