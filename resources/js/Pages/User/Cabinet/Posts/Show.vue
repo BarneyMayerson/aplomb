@@ -1,9 +1,11 @@
 <script setup>
-import { Head, Link, usePage } from "@inertiajs/vue3";
+import { Head, Link, router, usePage } from "@inertiajs/vue3";
 import { formatDistance, parseISO } from "date-fns";
 import CabinetNavbar from "@/Navs/CabinetNavbar.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import { computed } from "vue";
+import { useConfirm } from "@/Composables/useConfirm";
 
 const props = defineProps({
   post: {
@@ -17,6 +19,21 @@ const formattedDate = computed(() =>
 );
 
 const author = computed(() => usePage().props.auth.user?.game_username);
+
+const { confirmation } = useConfirm();
+
+const deletePost = async () => {
+  if (!(await confirmation("Are you sure you want to delete this post?"))) {
+    return;
+  }
+
+  router.delete(
+    route("cabinet.posts.destroy", {
+      post: props.post.id,
+      page: 1,
+    }),
+  );
+};
 </script>
 
 <template>
@@ -39,10 +56,13 @@ const author = computed(() => usePage().props.auth.user?.game_username);
         <article class="mt-6 text-lg xl:text-xl">
           <pre class="whitespace-pre-wrap font-sans">{{ post.body }}</pre>
         </article>
-        <div class="mt-4">
+        <div class="mt-8 flex items-center space-x-3">
           <Link :href="route('cabinet.posts.edit', post.id)">
             <PrimaryButton>Edit</PrimaryButton>
           </Link>
+          <form @submit.prevent="deletePost">
+            <DangerButton type="submit">Delete</DangerButton>
+          </form>
         </div>
       </div>
     </div>
