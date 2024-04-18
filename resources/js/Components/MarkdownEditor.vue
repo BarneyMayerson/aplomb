@@ -6,7 +6,16 @@ import { Markdown } from "tiptap-markdown";
 import "remixicon/fonts/remixicon.css";
 
 const editor = useEditor({
-  extensions: [StarterKit, Markdown],
+  extensions: [
+    StarterKit.configure({
+      heading: {
+        levels: [2, 3, 4],
+      },
+      code: false,
+      codeBlock: false,
+    }),
+    Markdown,
+  ],
   onUpdate: () =>
     emit("update:modelValue", editor.value?.storage.markdown.getMarkdown()),
   editorProps: {
