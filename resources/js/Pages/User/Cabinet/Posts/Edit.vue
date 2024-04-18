@@ -6,6 +6,7 @@ import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import MarkdownEditor from "@/Components/MarkdownEditor.vue";
 
 const props = defineProps({
   post: {
@@ -49,6 +50,7 @@ const updatePost = () =>
           </div>
           <div class="mt-4">
             <InputLabel value="Body" for="body" class="sr-only" />
+            <MarkdownEditor />
             <TextArea id="body" v-model="form.body" rows="20" />
             <InputError :message="form.errors.body" class="mt-1" />
           </div>
