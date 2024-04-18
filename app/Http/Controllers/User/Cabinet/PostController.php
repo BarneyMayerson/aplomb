@@ -44,7 +44,9 @@ class PostController extends Controller
 
         $post = Post::create([...$data, "user_id" => $request->user()->id]);
 
-        return redirect($post->cabinetShowRoute());
+        return redirect($post->cabinetShowRoute())->banner(
+            "Post has been saved."
+        );
     }
 
     /**
@@ -85,7 +87,9 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect($post->cabinetShowRoute());
+        return redirect($post->cabinetShowRoute())->banner(
+            "Post has been updates."
+        );
     }
 
     /**
@@ -99,6 +103,6 @@ class PostController extends Controller
 
         return to_route("cabinet.posts.index", [
             "page" => $request->query("page"),
-        ]);
+        ])->banner("Post has been deleted.");
     }
 }
