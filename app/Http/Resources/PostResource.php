@@ -22,6 +22,7 @@ class PostResource extends JsonResource
             ),
             "title" => $this->title,
             "body" => $this->body,
+            "html" => $this->html,
             "created_at" => $this->created_at,
             "published_at" => $this->published_at ?? null,
         ];

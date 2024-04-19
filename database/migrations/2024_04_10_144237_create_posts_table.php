@@ -21,6 +21,7 @@ return new class extends Migration {
                 ->restrictOnDelete();
             $table->string("title");
             $table->longText("body");
+            $table->longText("html");
             $table->string("image")->nullable();
             $table->timestamp("published_at")->nullable();
             $table->timestamps();

@@ -44,7 +44,7 @@ const deletePost = async () => {
       <div class="px-4 py-8">
         <div class="flex justify-between">
           <div>
-            <h1 class="font-bold text-2xl">{{ post.title }}</h1>
+            <h1 class="font-bold text-3xl">{{ post.title }}</h1>
             <span class="block mt-1 text-sm">
               {{ formattedDate }} ago by {{ author }}
             </span>
@@ -53,9 +53,10 @@ const deletePost = async () => {
             <PrimaryButton>All Posts</PrimaryButton>
           </Link>
         </div>
-        <article class="mt-6 text-lg xl:text-xl">
-          <pre class="whitespace-pre-wrap font-sans">{{ post.body }}</pre>
-        </article>
+        <article
+          class="mt-6 prose dark:prose-invert prose-lg max-w-none"
+          v-html="post.html"
+        />
         <div class="mt-8 flex items-center space-x-3">
           <Link :href="route('cabinet.posts.edit', post.id)">
             <PrimaryButton>Edit</PrimaryButton>
