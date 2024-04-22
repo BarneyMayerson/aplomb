@@ -51,7 +51,6 @@ const updatePost = () =>
           <div class="mt-4">
             <InputLabel value="Body" for="body" class="sr-only" />
             <MarkdownEditor v-model="form.body" />
-            <TextArea id="body" v-model="form.body" rows="20" />
             <InputError :message="form.errors.body" class="mt-1" />
           </div>
           <div class="mt-4">
