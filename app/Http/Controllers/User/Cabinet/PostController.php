@@ -68,6 +68,10 @@ class PostController extends Controller
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
+        if ($post->isPublished()) {
+            return back()->dangerBanner("You cannot edit a published post.");
+        }
+
         return Inertia::render("User/Cabinet/Posts/Edit", [
             "post" => $post,
         ]);
@@ -79,6 +83,10 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
+
+        if ($post->isPublished()) {
+            return back()->dangerBanner("You cannot update a published post.");
+        }
 
         $data = $request->validate([
             "title" => "required|string|min:2|max:255",

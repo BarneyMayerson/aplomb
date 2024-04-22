@@ -30,3 +30,14 @@ it("can't edit another user post", function () {
         ->get(route("cabinet.posts.edit", $post))
         ->assertForbidden();
 });
+
+it("can't edit a published post", function () {
+    $post = Post::factory()->published()->create();
+
+    actingAs($post->user)
+        ->get(route("cabinet.posts.edit", $post))
+        ->assertSessionHas("flash", [
+            "bannerStyle" => "danger",
+            "banner" => "You cannot edit a published post.",
+        ]);
+});

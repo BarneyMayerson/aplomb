@@ -56,6 +56,20 @@ it("cannon update a post from another user", function () {
         ->assertForbidden();
 });
 
+it("cannot update a published post", function () {
+    $post = Post::factory()->published()->create();
+
+    actingAs($post->user)
+        ->patch(route("cabinet.posts.update", $post), [
+            "title" => "New title",
+            "body" => "New body",
+        ])
+        ->assertSessionHas("flash", [
+            "bannerStyle" => "danger",
+            "banner" => "You cannot update a published post.",
+        ]);
+});
+
 it("requires a valid data", function (array $badData, array|string $errors) {
     $post = Post::factory()->create();
 

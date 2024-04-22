@@ -31,6 +31,15 @@ class PostFactory extends Factory
         ];
     }
 
+    public function published(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                "published_at" => now(),
+            ];
+        });
+    }
+
     public function withFixture(): static
     {
         $posts = static::getFixtures()
