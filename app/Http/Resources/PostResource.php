@@ -25,6 +25,7 @@ class PostResource extends JsonResource
             "html" => $this->html,
             "created_at" => $this->created_at,
             "published_at" => $this->published_at ?? null,
+            "readonly" => $this->isPublished(),
         ];
     }
 }
