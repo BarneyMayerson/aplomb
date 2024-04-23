@@ -59,12 +59,12 @@ const emit = defineEmits(["delete"]);
         <Link
           as="button"
           :href="route('cabinet.posts.edit', post.id)"
-          class="p-2 rounded-md dark:text-gray-200 bg-gray-100 dark:bg-gray-700"
+          class="p-2 rounded-md dark:text-gray-200"
           title="Edit"
           :class="[
             post.readonly
               ? 'cursor-not-allowed bg-black/15 dark:bg-black/35'
-              : 'cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition ease-in-out duration-150',
+              : 'cursor-pointer bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition ease-in-out duration-150',
           ]"
           :disabled="post.readonly"
         >
@@ -73,11 +73,11 @@ const emit = defineEmits(["delete"]);
 
         <form @submit.prevent="$emit('delete', post.id)">
           <button
-            class="p-2 rounded-md text-red-700 dark:text-red-200 bg-red-100 dark:bg-red-700"
+            class="p-2 rounded-md text-red-700 dark:text-red-200"
             :class="[
               post.readonly
                 ? 'cursor-not-allowed bg-black/15 dark:bg-black/35'
-                : 'cursor-pointer hover:bg-red-200 dark:hover:bg-red-600 transition ease-in-out duration-150',
+                : 'cursor-pointer bg-red-100 dark:bg-red-700 hover:bg-red-200 dark:hover:bg-red-600 transition ease-in-out duration-150',
             ]"
             :disabled="post.readonly"
           >
@@ -88,12 +88,12 @@ const emit = defineEmits(["delete"]);
         <Link
           as="button"
           href="#"
-          class="p-2 rounded-md text-yellow-700 dark:text-yellow-200 bg-yellow-100 dark:bg-yellow-700"
+          class="p-2 rounded-md text-yellow-700 dark:text-yellow-200"
           title="Publish"
           :class="[
             post.readonly
               ? 'cursor-not-allowed bg-black/15 dark:bg-black/35'
-              : 'cursor-pointer hover:bg-yellow-200 dark:hover:bg-yellow-600 transition ease-in-out duration-150',
+              : 'cursor-pointer bg-yellow-100 dark:bg-yellow-700 hover:bg-yellow-200 dark:hover:bg-yellow-600 transition ease-in-out duration-150',
           ]"
           :disabled="post.readonly"
         >
