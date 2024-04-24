@@ -5,8 +5,6 @@ namespace App\Http\Controllers\User\Cabinet;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\MassAssignmentException;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -68,7 +66,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post): InertiaResponse
+    public function edit(Post $post): InertiaResponse|RedirectResponse
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
