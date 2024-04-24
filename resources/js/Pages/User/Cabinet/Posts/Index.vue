@@ -29,6 +29,25 @@ const deletePost = async (postId) => {
     },
   );
 };
+
+const publishPost = async (postId) => {
+  if (
+    !(await confirmation(
+      "Once a post is published, you will not be able to edit or unpublish. Are you sure you want to delete this post?",
+    ))
+  ) {
+    return;
+  }
+
+  router.patch(
+    route("cabinet.posts.publish", {
+      post: postId,
+    }),
+    {
+      preserveScroll: true,
+    },
+  );
+};
 </script>
 
 <template>
@@ -49,7 +68,11 @@ const deletePost = async (postId) => {
             class="mt-8 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:gap-6 xl:grid-cols-3 xl-gap-8"
           >
             <template v-for="post in posts.data" :key="post.id">
-              <PostCard :post="post" @delete="deletePost" />
+              <PostCard
+                :post="post"
+                @delete="deletePost"
+                @publish="publishPost"
+              />
             </template>
           </div>
 

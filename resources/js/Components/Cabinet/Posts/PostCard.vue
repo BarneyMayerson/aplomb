@@ -28,7 +28,7 @@ const publishedForHumans = computed(() =>
     : "Not published",
 );
 
-const emit = defineEmits(["delete"]);
+const emit = defineEmits(["delete", "publish"]);
 </script>
 
 <template>
@@ -73,6 +73,7 @@ const emit = defineEmits(["delete"]);
 
         <form @submit.prevent="$emit('delete', post.id)">
           <button
+            title="Delete"
             class="p-2 rounded-md text-red-700 dark:text-red-200"
             :class="[
               post.readonly
@@ -85,20 +86,20 @@ const emit = defineEmits(["delete"]);
           </button>
         </form>
 
-        <Link
-          as="button"
-          href="#"
-          class="p-2 rounded-md text-yellow-700 dark:text-yellow-200"
-          title="Publish"
-          :class="[
-            post.readonly
-              ? 'cursor-not-allowed bg-black/15 dark:bg-black/35'
-              : 'cursor-pointer bg-yellow-100 dark:bg-yellow-700 hover:bg-yellow-200 dark:hover:bg-yellow-600 transition ease-in-out duration-150',
-          ]"
-          :disabled="post.readonly"
-        >
-          <BookOpenIcon class="w-5 h-5" />
-        </Link>
+        <form @submit.prevent="$emit('publish', post.id)">
+          <button
+            title="Publish"
+            class="p-2 rounded-md text-yellow-700 dark:text-yellow-200"
+            :class="[
+              post.readonly
+                ? 'cursor-not-allowed bg-black/15 dark:bg-black/35'
+                : 'cursor-pointer bg-yellow-100 dark:bg-yellow-700 hover:bg-yellow-200 dark:hover:bg-yellow-600 transition ease-in-out duration-150',
+            ]"
+            :disabled="post.readonly"
+          >
+            <BookOpenIcon class="w-5 h-5" />
+          </button>
+        </form>
       </div>
     </div>
   </div>
