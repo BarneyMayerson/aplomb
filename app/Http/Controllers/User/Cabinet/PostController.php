@@ -5,17 +5,21 @@ namespace App\Http\Controllers\User\Cabinet;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): InertiaResponse
     {
         return Inertia::render("User/Cabinet/Posts/Index", [
             "posts" => PostResource::collection(
@@ -27,7 +31,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): InertiaResponse
     {
         return Inertia::render("User/Cabinet/Posts/Create");
     }
@@ -35,7 +39,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             "title" => "required|string|min:2|max:255",
@@ -52,7 +56,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post): InertiaResponse
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
@@ -64,7 +68,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(Post $post): InertiaResponse
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
@@ -80,7 +84,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post): RedirectResponse
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
@@ -100,10 +104,21 @@ class PostController extends Controller
         );
     }
 
+    public function publish(Post $post): RedirectResponse
+    {
+        abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
+
+        $post->update(["published_at" => now()]);
+
+        return redirect($post->cabinetShowRoute())->banner(
+            "Post has been published."
+        );
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Post $post)
+    public function destroy(Request $request, Post $post): RedirectResponse
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
