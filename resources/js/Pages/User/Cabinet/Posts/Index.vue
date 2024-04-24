@@ -33,7 +33,7 @@ const deletePost = async (postId) => {
 const publishPost = async (postId) => {
   if (
     !(await confirmation(
-      "Once a post is published, you will not be able to edit or unpublish. Are you sure you want to delete this post?",
+      "Once a post is published, you will not be able to edit or unpublish. Are you sure you want to publish this post?",
     ))
   ) {
     return;
