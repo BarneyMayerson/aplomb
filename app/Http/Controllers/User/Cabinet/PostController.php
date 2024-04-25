@@ -23,6 +23,7 @@ class PostController extends Controller
             "posts" => PostResource::collection(
                 Auth()->user()->posts()->latest()->latest("id")->paginate(12)
             ),
+            "page" => request()->page,
         ]);
     }
 
@@ -122,8 +123,20 @@ class PostController extends Controller
 
         $post->delete();
 
+        // we calc the $page to catch an edge case
+        // when the last post was deteted on the last page of the panination
+        $posts = PostResource::collection(
+            Auth()->user()->posts()->latest()->latest("id")->paginate(12)
+        );
+
+        $page = $request->query("page");
+
+        if (isset($page) && $page > $posts->resource->lastPage()) {
+            $page--;
+        }
+
         return to_route("cabinet.posts.index", [
-            "page" => $request->query("page"),
+            "page" => $page > 1 ? $page : null,
         ])->banner("Post has been deleted.");
     }
 }

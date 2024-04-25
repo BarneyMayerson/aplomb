@@ -7,7 +7,7 @@ import Pagination from "@/Components/Pagination.vue";
 import PostCard from "@/Components/Cabinet/Posts/PostCard.vue";
 import { useConfirm } from "@/Composables/useConfirm";
 
-const props = defineProps(["posts"]);
+const props = defineProps(["posts", "page"]);
 
 const hasPosts = computed(() => !!props.posts.data.length);
 const showPagination = computed(() => props.posts.meta.last_page > 1);
@@ -52,6 +52,7 @@ const publishPost = async (postId) => {
 
 <template>
   <Head title="Your Posts" id="head" />
+  <div class="p">Page:: {{ page }}</div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="md:grid md:grid-cols-[180px_auto]">
       <CabinetNavbar class="py-2 md:py-6" />
