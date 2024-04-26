@@ -36,7 +36,7 @@ class PostResource extends JsonResource
         int $perPage = 12
     ): AnonymousResourceCollection {
         return static::collection(
-            $user->posts()->latest()->latest("id")->paginate(12)
+            $user->posts()->latest()->latest("id")->paginate($perPage)
         );
     }
 }

@@ -105,6 +105,10 @@ class PostController extends Controller
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
 
+        if ($post->isPublished()) {
+            return back()->dangerBanner("You cannot publish this post again.");
+        }
+
         $post->update(["published_at" => now()]);
 
         return redirect($post->cabinetShowRoute())->banner(
@@ -118,6 +122,10 @@ class PostController extends Controller
     public function destroy(Request $request, Post $post): RedirectResponse
     {
         abort_unless(Auth::id() === $post->user_id, Response::HTTP_FORBIDDEN);
+
+        if ($post->isPublished()) {
+            return back()->dangerBanner("You cannot delete a published post.");
+        }
 
         $post->delete();
 

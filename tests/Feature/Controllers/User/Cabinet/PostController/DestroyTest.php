@@ -69,3 +69,14 @@ it("cannot destroy a post from another user", function () {
         ->delete(route("cabinet.posts.destroy", $post))
         ->assertForbidden();
 });
+
+it("cannot destroy a published post", function () {
+    $post = Post::factory()->published()->create();
+
+    actingAs($post->user)
+        ->delete(route("cabinet.posts.destroy", $post))
+        ->assertSessionHas("flash", [
+            "bannerStyle" => "danger",
+            "banner" => "You cannot delete a published post.",
+        ]);
+});

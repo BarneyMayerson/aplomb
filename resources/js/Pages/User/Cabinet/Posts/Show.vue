@@ -101,15 +101,17 @@ const publishPost = async () => {
             <WarningButton
               type="submit"
               :class="{ 'blur-sm cursor-not-allowed': post.readonly }"
-              >Publish</WarningButton
             >
+              Publish
+            </WarningButton>
           </form>
           <form @submit.prevent="deletePost">
             <DangerButton
               type="submit"
               :class="{ 'blur-sm cursor-not-allowed': post.readonly }"
-              >Delete</DangerButton
             >
+              Delete
+            </DangerButton>
           </form>
         </div>
       </div>

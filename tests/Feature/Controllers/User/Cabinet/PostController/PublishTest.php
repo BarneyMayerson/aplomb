@@ -45,3 +45,14 @@ it("cannon publish a post from another user", function () {
         ->patch(route("cabinet.posts.publish", $post))
         ->assertForbidden();
 });
+
+it("cannon publish a published post", function () {
+    $post = Post::factory()->published()->create();
+
+    actingAs($post->user)
+        ->patch(route("cabinet.posts.publish", $post))
+        ->assertSessionHas("flash", [
+            "bannerStyle" => "danger",
+            "banner" => "You cannot publish this post again.",
+        ]);
+});
