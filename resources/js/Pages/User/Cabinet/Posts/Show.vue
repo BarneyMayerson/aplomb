@@ -93,6 +93,7 @@ const publishPost = async () => {
           >
             <PrimaryButton
               :class="{ 'blur-sm cursor-not-allowed': post.readonly }"
+              :disabled="post.readonly"
             >
               Edit
             </PrimaryButton>
@@ -101,6 +102,7 @@ const publishPost = async () => {
             <WarningButton
               type="submit"
               :class="{ 'blur-sm cursor-not-allowed': post.readonly }"
+              :disabled="post.readonly"
             >
               Publish
             </WarningButton>
@@ -109,6 +111,7 @@ const publishPost = async () => {
             <DangerButton
               type="submit"
               :class="{ 'blur-sm cursor-not-allowed': post.readonly }"
+              :disabled="post.readonly"
             >
               Delete
             </DangerButton>
