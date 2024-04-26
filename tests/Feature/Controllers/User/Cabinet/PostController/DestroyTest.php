@@ -29,11 +29,34 @@ it("redirects to the posts index page", function () {
 it(
     "redirects to the posts index page with the page query parameter",
     function () {
-        $post = Post::factory()->create();
+        $user = User::factory()->create();
+        // considering that the default per page is 12
+        $posts = Post::factory(14)->create(["user_id" => $user->id]);
 
-        actingAs($post->user)
+        actingAs($user)
             ->delete(
-                route("cabinet.posts.destroy", ["post" => $post, "page" => 2])
+                route("cabinet.posts.destroy", [
+                    "post" => $posts->first(),
+                    "page" => 2,
+                ])
+            )
+            ->assertRedirect(route("cabinet.posts.index", ["page" => 2]));
+    }
+);
+
+it(
+    "redirects to the posts index page with the proper page query parameter when the last post was deleted on the last page",
+    function () {
+        $user = User::factory()->create();
+        // considering that the default per page is 12
+        $posts = Post::factory(25)->create(["user_id" => $user->id]);
+
+        actingAs($user)
+            ->delete(
+                route("cabinet.posts.destroy", [
+                    "post" => $posts->first(),
+                    "page" => 3,
+                ])
             )
             ->assertRedirect(route("cabinet.posts.index", ["page" => 2]));
     }
