@@ -30,4 +30,13 @@ class PostResource extends JsonResource
             "readonly" => $this->isPublished(),
         ];
     }
+
+    public static function cabinetCollection(
+        User $user,
+        int $perPage = 12
+    ): AnonymousResourceCollection {
+        return static::collection(
+            $user->posts()->latest()->latest("id")->paginate(12)
+        );
+    }
 }

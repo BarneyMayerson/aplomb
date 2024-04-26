@@ -20,9 +20,7 @@ class PostController extends Controller
     public function index(): InertiaResponse
     {
         return Inertia::render("User/Cabinet/Posts/Index", [
-            "posts" => PostResource::collection(
-                Auth()->user()->posts()->latest()->latest("id")->paginate(12)
-            ),
+            "posts" => PostResource::cabinetCollection(Auth::user()),
             "page" => request()->page,
         ]);
     }
@@ -125,9 +123,7 @@ class PostController extends Controller
 
         // we calc the $page to catch an edge case
         // when the last post was deteted on the last page of the panination
-        $posts = PostResource::collection(
-            Auth()->user()->posts()->latest()->latest("id")->paginate(12)
-        );
+        $posts = PostResource::cabinetCollection(Auth::user());
 
         $page = $request->query("page");
 
