@@ -22,7 +22,6 @@ const deletePost = async (postId) => {
   router.delete(
     route("cabinet.posts.destroy", {
       post: postId,
-      page: props.posts.meta.current_page,
     }),
     {
       preserveScroll: true,
@@ -52,7 +51,6 @@ const publishPost = async (postId) => {
 
 <template>
   <Head title="Your Posts" id="head" />
-  <div class="p">Page:: {{ page }}</div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="md:grid md:grid-cols-[180px_auto]">
       <CabinetNavbar class="py-2 md:py-6" />

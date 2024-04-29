@@ -4,6 +4,7 @@ import { EditorContent, useEditor } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
 import { Link } from "@tiptap/extension-link";
+import { Underline } from "@tiptap/extension-underline";
 import "remixicon/fonts/remixicon.css";
 
 const props = defineProps({
@@ -23,6 +24,7 @@ const editor = useEditor({
     }),
     Markdown,
     Link,
+    Underline,
   ],
   content: props.modelValue,
   onUpdate: () =>
@@ -95,6 +97,21 @@ const promptUserForHref = () => {
           title="Italic"
         >
           <i class="ri-italic"></i>
+        </button>
+      </li>
+      <li>
+        <button
+          @click="() => editor.chain().focus().toggleUnderline().run()"
+          type="button"
+          class="px-3 py-2"
+          :class="[
+            editor.isActive('underline')
+              ? 'bg-indigo-300 dark:bg-indigo-500'
+              : 'hover:bg-gray-200 dark:hover:bg-gray-600',
+          ]"
+          title="Underline"
+        >
+          <i class="ri-underline"></i>
         </button>
       </li>
       <li>

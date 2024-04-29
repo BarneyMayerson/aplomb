@@ -21,7 +21,6 @@ class PostController extends Controller
     {
         return Inertia::render("User/Cabinet/Posts/Index", [
             "posts" => PostResource::cabinetCollection(Auth::user()),
-            "page" => request()->page,
         ]);
     }
 
