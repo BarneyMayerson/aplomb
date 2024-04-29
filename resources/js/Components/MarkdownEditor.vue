@@ -21,7 +21,6 @@ const editor = useEditor({
         levels: [2, 3, 4],
       },
       code: false,
-      codeBlock: false,
     }),
     Markdown,
     Link,
@@ -159,6 +158,21 @@ const promptUserForHref = () => {
           title="Blockquote"
         >
           <i class="ri-double-quotes-l"></i>
+        </button>
+      </li>
+      <li>
+        <button
+          @click="() => editor.chain().focus().toggleCodeBlock().run()"
+          type="button"
+          class="px-3 py-2"
+          :class="[
+            editor.isActive('codeBlock')
+              ? 'bg-indigo-300 dark:bg-indigo-500'
+              : 'hover:bg-gray-200 dark:hover:bg-gray-600',
+          ]"
+          title="Code Block"
+        >
+          <i class="ri-code-line"></i>
         </button>
       </li>
       <li>
