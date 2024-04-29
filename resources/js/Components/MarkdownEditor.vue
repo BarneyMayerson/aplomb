@@ -5,6 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
 import { Link } from "@tiptap/extension-link";
 import { Underline } from "@tiptap/extension-underline";
+import { Highlight } from "@tiptap/extension-highlight";
 import "remixicon/fonts/remixicon.css";
 
 const props = defineProps({
@@ -25,6 +26,7 @@ const editor = useEditor({
     Markdown,
     Link,
     Underline,
+    Highlight,
   ],
   content: props.modelValue,
   onUpdate: () =>
@@ -127,6 +129,21 @@ const promptUserForHref = () => {
           title="Strikethrough"
         >
           <i class="ri-strikethrough"></i>
+        </button>
+      </li>
+      <li>
+        <button
+          @click="() => editor.chain().focus().toggleHighlight().run()"
+          type="button"
+          class="px-3 py-2"
+          :class="[
+            editor.isActive('highlight')
+              ? 'bg-indigo-300 dark:bg-indigo-500'
+              : 'hover:bg-gray-200 dark:hover:bg-gray-600',
+          ]"
+          title="Highlight"
+        >
+          <i class="ri-text bg-[#ffff00] p-1 dark:text-black"></i>
         </button>
       </li>
       <li>

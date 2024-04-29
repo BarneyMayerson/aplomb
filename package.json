@@ -13,6 +13,7 @@
     "@prettier/plugin-php": "^0.22.1",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.2",
+    "@tiptap/extension-highlight": "^2.3.0",
     "@tiptap/extension-link": "^2.3.0",
     "@tiptap/extension-underline": "^2.3.0",
     "@tiptap/pm": "^2.3.0",
