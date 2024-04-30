@@ -6,6 +6,8 @@ import { Markdown } from "tiptap-markdown";
 import { Link } from "@tiptap/extension-link";
 import { Underline } from "@tiptap/extension-underline";
 import { Highlight } from "@tiptap/extension-highlight";
+import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
+import { common, createLowlight } from "lowlight";
 import "remixicon/fonts/remixicon.css";
 
 const props = defineProps({
@@ -14,6 +16,8 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
+const lowlight = createLowlight(common);
+
 const editor = useEditor({
   extensions: [
     StarterKit.configure({
@@ -21,11 +25,13 @@ const editor = useEditor({
         levels: [2, 3, 4],
       },
       code: false,
+      codeBlock: false,
     }),
     Markdown,
     Link,
     Underline,
     Highlight,
+    CodeBlockLowlight.configure({ lowlight }),
   ],
   content: props.modelValue,
   onUpdate: () =>
@@ -275,3 +281,79 @@ const promptUserForHref = () => {
     <EditorContent :editor />
   </div>
 </template>
+
+<style lang="scss">
+/* Basic editor styles */
+.tiptap {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  pre {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: #616161;
+    }
+
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-attribute,
+    .hljs-tag,
+    .hljs-name,
+    .hljs-regexp,
+    .hljs-link,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class {
+      color: #f98181;
+    }
+
+    .hljs-number,
+    .hljs-meta,
+    .hljs-built_in,
+    .hljs-builtin-name,
+    .hljs-literal,
+    .hljs-type,
+    .hljs-params {
+      color: #fbbc88;
+    }
+
+    .hljs-string,
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #b9f18d;
+    }
+
+    .hljs-title,
+    .hljs-section {
+      color: #faf594;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag {
+      color: #70cff8;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-strong {
+      font-weight: 700;
+    }
+  }
+}
+</style>
