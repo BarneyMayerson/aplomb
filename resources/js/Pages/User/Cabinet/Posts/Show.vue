@@ -5,8 +5,9 @@ import CabinetNavbar from "@/Navs/CabinetNavbar.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import WarningButton from "@/Components/WarningButton.vue";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useConfirm } from "@/Composables/useConfirm";
+import { highlight } from "@/Services/SyntaxHighlighting";
 
 const props = defineProps({
   post: {
@@ -59,6 +60,8 @@ const publishPost = async () => {
     }),
   );
 };
+
+onMounted(() => highlight());
 </script>
 
 <template>
