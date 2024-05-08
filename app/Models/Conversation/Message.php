@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Message extends Model
 {
-    protected $casts = [
-        "read_at" => "datetime",
-    ];
+    protected function casts(): array
+    {
+        return [
+            "read_at" => "datetime",
+        ];
+    }
 
     public function user(): BelongsTo
     {

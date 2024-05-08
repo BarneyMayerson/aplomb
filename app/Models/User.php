@@ -39,20 +39,18 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        "email_verified_at" => "datetime",
-    ];
-
-    /**
      * The accessors to append to the model's array form.
      *
      * @var array<int, string>
      */
     protected $appends = ["profile_photo_url"];
+
+    protected function casts(): array
+    {
+        return [
+            "email_verified_at" => "datetime",
+        ];
+    }
 
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.

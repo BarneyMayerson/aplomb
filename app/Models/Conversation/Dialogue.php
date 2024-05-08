@@ -18,9 +18,12 @@ class Dialogue extends Model
 
     public $timestamps = false;
 
-    protected $casts = [
-        "blocked" => "boolean",
-    ];
+    protected function casts(): array
+    {
+        return [
+            "blocked" => "boolean",
+        ];
+    }
 
     public function initiator(): BelongsTo
     {
