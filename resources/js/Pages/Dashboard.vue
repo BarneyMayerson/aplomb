@@ -4,6 +4,7 @@ import { Link } from "@inertiajs/vue3";
 import PageTitle from "@/Components/PageTitle.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import DialogModal from "@/Components/DialogModal.vue";
+import NFSUMenuItem from "@/Components/NFSUMenuItem.vue";
 
 const showDialogModal = ref(false);
 </script>
@@ -23,6 +24,17 @@ const showDialogModal = ref(false);
             <SecondaryButton>Slide Modal</SecondaryButton>
           </Link>
         </div>
+      </div>
+
+      <div class="mt-8">
+        <nav class="w-96 main-menu">
+          <ul>
+            <NFSUMenuItem href="#" active>Tourneys</NFSUMenuItem>
+            <NFSUMenuItem href="#">Top Performers</NFSUMenuItem>
+            <NFSUMenuItem href="#">Ranked Racers</NFSUMenuItem>
+            <NFSUMenuItem href="#">Monitoring Servers</NFSUMenuItem>
+          </ul>
+        </nav>
       </div>
       <!-- <Welcome /> -->
     </div>

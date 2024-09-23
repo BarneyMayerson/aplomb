@@ -47,22 +47,26 @@ const containerClasses = computed(() =>
 
 <style scoped>
 .animate-blinking {
-  -webkit-animation: animate-blinking 0.6s linear infinite;
-  animation: animate-blinking 0.6s linear infinite;
+  -webkit-animation: animate-blinking 1s infinite;
+  animation: animate-blinking 1s infinite;
 }
 
 @-webkit-keyframes animate-blinking {
-  0% {
+  0%,
+  49% {
     opacity: 0.1;
   }
+  50%,
   100% {
     opacity: 1;
   }
 }
 @keyframes animate-blinking {
-  0% {
+  0%,
+  49% {
     opacity: 0.1;
   }
+  50%,
   100% {
     opacity: 1;
   }
