@@ -13,77 +13,77 @@ beforeEach(function () {
     $this->interlocutor = User::factory()->create();
 
     $this->validData = [
-        "from" => $this->initiator->id,
-        "to" => $this->interlocutor->id,
-        "message" => "Hi there!",
+        'from' => $this->initiator->id,
+        'to' => $this->interlocutor->id,
+        'message' => 'Hi there!',
     ];
 });
 
-it("requires authentication", function () {
-    post(route("cabinet.dialogues.store"))->assertRedirect(route("login"));
+it('requires authentication', function () {
+    post(route('cabinet.dialogues.store'))->assertRedirect(route('login'));
 });
 
 it(
-    "store a dialog in which the authenticated user starts a conversation with another",
+    'store a dialog in which the authenticated user starts a conversation with another',
     function () {
         actingAs($this->initiator)->post(
-            route("cabinet.dialogues.store", $this->validData)
+            route('cabinet.dialogues.store', $this->validData)
         );
 
         assertDatabaseHas(Dialogue::class, [
-            "initiator_id" => $this->initiator->id,
-            "interlocutor_id" => $this->interlocutor->id,
+            'initiator_id' => $this->initiator->id,
+            'interlocutor_id' => $this->interlocutor->id,
         ]);
     }
 );
 
-it("requires a valid data", function (array $badData, array|string $errors) {
+it('requires a valid data', function (array $badData, array|string $errors) {
     actingAs($this->initiator)
-        ->post(route("cabinet.dialogues.store"), [
+        ->post(route('cabinet.dialogues.store'), [
             ...$this->validData,
             ...$badData,
         ])
         ->assertInvalid($errors);
 })->with([
-    [["from" => null], "from"], // required
-    [["from" => "str"], "from"], // numeric
-    [["to" => 1], "from"], // different of 'to'
-    [["from" => 10000], "from"], // exists in db table
+    [['from' => null], 'from'], // required
+    [['from' => 'str'], 'from'], // numeric
+    [['to' => 1], 'from'], // different of 'to'
+    [['from' => 10000], 'from'], // exists in db table
 
-    [["to" => null], "to"],
-    [["to" => "str"], "to"],
-    [["to" => 10000], "to"],
+    [['to' => null], 'to'],
+    [['to' => 'str'], 'to'],
+    [['to' => 10000], 'to'],
 ]);
 
 it(
     "doesn't create a new dialog between the interlocutor and the previous initiator",
     function () {
         actingAs($this->initiator)->post(
-            route("cabinet.dialogues.store", $this->validData)
+            route('cabinet.dialogues.store', $this->validData)
         );
 
         assertDatabaseHas(Dialogue::class, [
-            "initiator_id" => $this->initiator->id,
-            "interlocutor_id" => $this->interlocutor->id,
+            'initiator_id' => $this->initiator->id,
+            'interlocutor_id' => $this->interlocutor->id,
         ]);
 
         actingAs($this->interlocutor)->post(
-            route("cabinet.dialogues.store", [
-                "from" => $this->interlocutor->id,
-                "to" => $this->initiator->id,
-                "message" => "Hi there!",
+            route('cabinet.dialogues.store', [
+                'from' => $this->interlocutor->id,
+                'to' => $this->initiator->id,
+                'message' => 'Hi there!',
             ])
         );
 
         assertDatabaseMissing(Dialogue::class, [
-            "initiator_id" => $this->interlocutor->id,
-            "interlocutor_id" => $this->initiator->id,
+            'initiator_id' => $this->interlocutor->id,
+            'interlocutor_id' => $this->initiator->id,
         ]);
     }
 );
 
-it("redirects to the cabinet dialogues show page", function () {
+it('redirects to the cabinet dialogues show page', function () {
     actingAs($this->initiator)
-        ->post(route("cabinet.dialogues.store", $this->validData))
-        ->assertRedirect(route("cabinet.dialogues.show", 1));
+        ->post(route('cabinet.dialogues.store', $this->validData))
+        ->assertRedirect(route('cabinet.dialogues.show', 1));
 });

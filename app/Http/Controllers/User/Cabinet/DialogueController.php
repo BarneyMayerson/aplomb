@@ -15,8 +15,8 @@ class DialogueController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render("User/Cabinet/Dialogues/Index", [
-            "dialogues" => DialogueResource::collection(
+        return Inertia::render('User/Cabinet/Dialogues/Index', [
+            'dialogues' => DialogueResource::collection(
                 Dialogue::allByUser(Auth::id())
             ),
         ]);
@@ -24,36 +24,36 @@ class DialogueController extends Controller
 
     public function show(Dialogue $dialogue): Response
     {
-        $this->authorize("view", $dialogue);
+        $this->authorize('view', $dialogue);
 
-        return Inertia::render("User/Cabinet/Dialogues/Show", [
-            "dialogue" => DialogueResource::make($dialogue),
+        return Inertia::render('User/Cabinet/Dialogues/Show', [
+            'dialogue' => DialogueResource::make($dialogue),
         ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            "from" => "required|numeric|different:to|exists:users,id",
-            "to" => "required|numeric|exists:users,id",
-            "message" => "required|string|min:2|max:240",
+            'from' => 'required|numeric|different:to|exists:users,id',
+            'to' => 'required|numeric|exists:users,id',
+            'message' => 'required|string|min:2|max:240',
         ]);
 
-        $dialogue = Dialogue::findOrCreate($request["from"], $request["to"]);
+        $dialogue = Dialogue::findOrCreate($request['from'], $request['to']);
 
         $dialogue->addMessage(
-            $request["from"],
-            $request["to"],
-            $request["message"]
+            $request['from'],
+            $request['to'],
+            $request['message']
         );
 
-        return to_route("cabinet.dialogues.show", $dialogue);
+        return to_route('cabinet.dialogues.show', $dialogue);
     }
 
     public function addMessage(Request $request, Dialogue $dialogue): void
     {
         $request->validate([
-            "text" => "required|string|max:240",
+            'text' => 'required|string|max:240',
         ]);
 
         $dialogue->addMessage(

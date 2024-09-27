@@ -20,19 +20,18 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            "game_username" =>
-                "required|string|min:3|max:15|regex:/^[A-Za-z0-9]+$/|unique:users",
-            "email" => "required|string|email:filter|max:255|unique:users",
-            "password" => $this->passwordRules(),
-            "terms" => Jetstream::hasTermsAndPrivacyPolicyFeature()
-                ? ["accepted", "required"]
-                : "",
+            'game_username' => 'required|string|min:3|max:15|regex:/^[A-Za-z0-9]+$/|unique:users',
+            'email' => 'required|string|email:filter|max:255|unique:users',
+            'password' => $this->passwordRules(),
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature()
+                ? ['accepted', 'required']
+                : '',
         ])->validate();
 
         return User::create([
-            "game_username" => $input["game_username"],
-            "email" => $input["email"],
-            "password" => Hash::make($input["password"]),
+            'game_username' => $input['game_username'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
         ]);
     }
 }

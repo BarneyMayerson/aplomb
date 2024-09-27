@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         $racer = User::factory()
             ->has(Post::factory(16)->withFixture())
             ->create([
-                "game_username" => "racer",
-                "email" => "racer@apl.lan",
+                'game_username' => 'racer',
+                'email' => 'racer@apl.lan',
             ]);
     }
 }

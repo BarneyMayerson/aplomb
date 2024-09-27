@@ -5,19 +5,19 @@ use App\Models\User;
 
 use function Pest\Laravel\get;
 
-it("returns the public profile component", function () {
+it('returns the public profile component', function () {
     $user = User::factory()->create();
 
-    get(route("public-profile", $user))
+    get(route('public-profile', $user))
         ->assertOk()
-        ->assertComponent("PublicProfile");
+        ->assertComponent('PublicProfile');
 });
 
-it("passes a user to the view", function () {
+it('passes a user to the view', function () {
     $user = User::factory()->create();
 
-    get(route("public-profile", $user))->assertHasResource(
-        "user",
+    get(route('public-profile', $user))->assertHasResource(
+        'user',
         UserResource::make($user)
     );
 });

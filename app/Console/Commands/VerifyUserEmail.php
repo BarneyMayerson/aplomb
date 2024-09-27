@@ -14,14 +14,14 @@ class VerifyUserEmail extends Command
      *
      * @var string
      */
-    protected $signature = "user:verify-email {email?}";
+    protected $signature = 'user:verify-email {email?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = "Verify given user email address";
+    protected $description = 'Verify given user email address';
 
     /**
      * Execute the console command.
@@ -29,15 +29,15 @@ class VerifyUserEmail extends Command
     public function handle()
     {
         $email =
-            $this->argument("email") ??
+            $this->argument('email') ??
             text(
-                label: "What is user email?",
+                label: 'What is user email?',
                 required: true,
-                hint: "Enter existing user email address"
+                hint: 'Enter existing user email address'
             );
 
         /** @var User $user */
-        if (!($user = User::where("email", $email)->first())) {
+        if (! ($user = User::where('email', $email)->first())) {
             $this->error("\nIndefined user with email: {$email}");
             $this->line("\n");
 
@@ -45,7 +45,7 @@ class VerifyUserEmail extends Command
         }
 
         try {
-            if (!$user->hasVerifiedEmail()) {
+            if (! $user->hasVerifiedEmail()) {
                 $user->markEmailAsVerified();
             }
         } catch (\Exception $e) {

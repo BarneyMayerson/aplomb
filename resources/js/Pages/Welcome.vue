@@ -14,7 +14,7 @@ defineProps({
 <template>
   <Head title="Welcome" />
 
-  <section class="container mx-auto py-8">
+  <section class="py-8 container mx-auto">
     <div class="relative container mx-auto">
       <div class="z-0">
         <video autoplay muted loop class="w-full h-full grayscale">

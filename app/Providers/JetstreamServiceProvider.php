@@ -30,27 +30,27 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Fortify::loginView(function () {
-            return Inertia::modal("Auth/Login", [
-                "canResetPassword" => Route::has("password.reset"),
-                "status" => session("status"),
-            ])->baseRoute("home");
+            return Inertia::modal('Auth/Login', [
+                'canResetPassword' => Route::has('password.reset'),
+                'status' => session('status'),
+            ])->baseRoute('home');
         });
 
         Fortify::registerView(function () {
-            return Inertia::modal("Auth/Register")->baseRoute("home");
+            return Inertia::modal('Auth/Register')->baseRoute('home');
         });
 
         Fortify::requestPasswordResetLinkView(function () {
-            return Inertia::modal("Auth/ForgotPassword", [
-                "status" => session("status"),
-            ])->baseRoute("home");
+            return Inertia::modal('Auth/ForgotPassword', [
+                'status' => session('status'),
+            ])->baseRoute('home');
         });
 
         Fortify::resetPasswordView(function (Request $request) {
-            return Inertia::modal("Auth/ResetPassword", [
-                "email" => $request["email"],
-                "token" => $request["token"],
-            ])->baseRoute("home");
+            return Inertia::modal('Auth/ResetPassword', [
+                'email' => $request['email'],
+                'token' => $request['token'],
+            ])->baseRoute('home');
         });
     }
 
@@ -59,8 +59,8 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configurePermissions(): void
     {
-        Jetstream::defaultApiTokenPermissions(["read"]);
+        Jetstream::defaultApiTokenPermissions(['read']);
 
-        Jetstream::permissions(["create", "read", "update", "delete"]);
+        Jetstream::permissions(['create', 'read', 'update', 'delete']);
     }
 }

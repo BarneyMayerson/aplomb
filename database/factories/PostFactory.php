@@ -14,6 +14,7 @@ use SplFileInfo;
 class PostFactory extends Factory
 {
     private static Collection $fixtures;
+
     /**
      * Define the model's default state.
      *
@@ -22,12 +23,12 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => fake()->sentence(),
-            "body" => Collection::times(
+            'title' => fake()->sentence(),
+            'body' => Collection::times(
                 4,
-                fn() => fake()->realText(1200)
-            )->join(PHP_EOL . PHP_EOL),
-            "user_id" => User::factory(),
+                fn () => fake()->realText(1200)
+            )->join(PHP_EOL.PHP_EOL),
+            'user_id' => User::factory(),
         ];
     }
 
@@ -35,7 +36,7 @@ class PostFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                "published_at" => now(),
+                'published_at' => now(),
             ];
         });
     }
@@ -43,13 +44,13 @@ class PostFactory extends Factory
     public function withFixture(): static
     {
         $posts = static::getFixtures()
-            ->map(fn(string $contents) => str($contents)->explode("\n", 2))
+            ->map(fn (string $contents) => str($contents)->explode("\n", 2))
             ->map(
-                fn(Collection $parts) => [
-                    "title" => str($parts[0])
+                fn (Collection $parts) => [
+                    'title' => str($parts[0])
                         ->trim()
-                        ->after("# "),
-                    "body" => str($parts[1])->trim(),
+                        ->after('# '),
+                    'body' => str($parts[1])->trim(),
                 ]
             );
 
@@ -59,7 +60,7 @@ class PostFactory extends Factory
     private static function getFixtures(): Collection
     {
         return self::$fixtures ??= collect(
-            File::files(database_path("factories/fixturies/posts"))
-        )->map(fn(SplFileInfo $fileInfo) => $fileInfo->getContents());
+            File::files(database_path('factories/fixturies/posts'))
+        )->map(fn (SplFileInfo $fileInfo) => $fileInfo->getContents());
     }
 }

@@ -14,10 +14,10 @@ class PublicProfileController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user = User::where("game_username", $request->user)->firstOrFail();
+        $user = User::where('game_username', $request->user)->firstOrFail();
 
-        return Inertia::render("PublicProfile", [
-            "user" => UserResource::make($user),
+        return Inertia::render('PublicProfile', [
+            'user' => UserResource::make($user),
         ]);
     }
 }

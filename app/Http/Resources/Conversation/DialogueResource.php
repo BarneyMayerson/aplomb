@@ -16,21 +16,21 @@ class DialogueResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "initiator" => UserResource::make($this->whenLoaded("initiator")),
-            "interlocutor" => UserResource::make(
-                $this->whenLoaded("interlocutor")
+            'id' => $this->id,
+            'initiator' => UserResource::make($this->whenLoaded('initiator')),
+            'interlocutor' => UserResource::make(
+                $this->whenLoaded('interlocutor')
             ),
-            "blocked" => $this->blocked,
-            "partner" => UserResource::make($this->partner()),
-            "messages" => MessageResource::collection(
+            'blocked' => $this->blocked,
+            'partner' => UserResource::make($this->partner()),
+            'messages' => MessageResource::collection(
                 $this->messages()
                     ->latest()
-                    ->with(["user", "receiver"])
+                    ->with(['user', 'receiver'])
                     ->get()
             ),
-            "can" => [
-                "view" => $request->user()?->can("view", $this->resource),
+            'can' => [
+                'view' => $request->user()?->can('view', $this->resource),
             ],
         ];
     }

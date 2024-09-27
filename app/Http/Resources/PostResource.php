@@ -17,17 +17,17 @@ class PostResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "user" => $this->whenLoaded(
-                "user",
-                fn() => UserResource::make($this->user)
+            'id' => $this->id,
+            'user' => $this->whenLoaded(
+                'user',
+                fn () => UserResource::make($this->user)
             ),
-            "title" => $this->title,
-            "body" => $this->body,
-            "html" => $this->html,
-            "created_at" => $this->created_at,
-            "published_at" => $this->published_at ?? null,
-            "readonly" => $this->isPublished(),
+            'title' => $this->title,
+            'body' => $this->body,
+            'html' => $this->html,
+            'created_at' => $this->created_at,
+            'published_at' => $this->published_at ?? null,
+            'readonly' => $this->isPublished(),
         ];
     }
 
@@ -36,7 +36,7 @@ class PostResource extends JsonResource
         int $perPage = 12
     ): AnonymousResourceCollection {
         return static::collection(
-            $user->posts()->latest()->latest("id")->paginate($perPage)
+            $user->posts()->latest()->latest('id')->paginate($perPage)
         );
     }
 }

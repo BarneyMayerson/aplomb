@@ -8,51 +8,51 @@ use function Pest\Laravel\patch;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
-it("requires authentication", function () {
-    patch(route("cabinet.posts.publish", 1))->assertRedirect(route("login"));
+it('requires authentication', function () {
+    patch(route('cabinet.posts.publish', 1))->assertRedirect(route('login'));
 });
 
-it("publishes the post", function () {
+it('publishes the post', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->create([
-        "user_id" => $user->id,
+        'user_id' => $user->id,
     ]);
 
     assertFalse($post->isPublished());
 
-    actingAs($user)->patch(route("cabinet.posts.publish", $post));
+    actingAs($user)->patch(route('cabinet.posts.publish', $post));
 
     assertTrue($post->fresh()->isPublished());
 });
 
-it("redirects to the cabinet post show page", function () {
+it('redirects to the cabinet post show page', function () {
     $user = User::factory()->create();
 
     $post = Post::factory()->create([
-        "user_id" => $user->id,
+        'user_id' => $user->id,
     ]);
 
     actingAs($user)
-        ->patch(route("cabinet.posts.publish", $post))
+        ->patch(route('cabinet.posts.publish', $post))
         ->assertRedirect($post->cabinetShowRoute());
 });
 
-it("cannon publish a post from another user", function () {
+it('cannon publish a post from another user', function () {
     $post = Post::factory()->create();
 
     actingAs(User::factory()->create())
-        ->patch(route("cabinet.posts.publish", $post))
+        ->patch(route('cabinet.posts.publish', $post))
         ->assertForbidden();
 });
 
-it("cannon publish a published post", function () {
+it('cannon publish a published post', function () {
     $post = Post::factory()->published()->create();
 
     actingAs($post->user)
-        ->patch(route("cabinet.posts.publish", $post))
-        ->assertSessionHas("flash", [
-            "bannerStyle" => "danger",
-            "banner" => "You cannot publish this post again.",
+        ->patch(route('cabinet.posts.publish', $post))
+        ->assertSessionHas('flash', [
+            'bannerStyle' => 'danger',
+            'banner' => 'You cannot publish this post again.',
         ]);
 });

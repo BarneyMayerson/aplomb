@@ -13,25 +13,25 @@ beforeEach(function () {
 });
 
 it(
-    "can store a message from an authenticated user to a dialogue partner",
+    'can store a message from an authenticated user to a dialogue partner',
     function () {
         $dialogue = Dialogue::factory()->create([
-            "initiator_id" => $this->initiator->id,
-            "interlocutor_id" => $this->interlocutor->id,
+            'initiator_id' => $this->initiator->id,
+            'interlocutor_id' => $this->interlocutor->id,
         ]);
 
         actingAs($this->initiator)->post(
-            route("cabinet.dialogues.show.add-message", [
-                "dialogue" => $dialogue,
-                "text" => "Hello",
+            route('cabinet.dialogues.show.add-message', [
+                'dialogue' => $dialogue,
+                'text' => 'Hello',
             ])
         );
 
         assertDatabaseHas(Message::class, [
-            "id" => $dialogue->id,
-            "user_id" => $this->initiator->id,
-            "receiver_id" => $this->interlocutor->id,
-            "text" => "Hello",
+            'id' => $dialogue->id,
+            'user_id' => $this->initiator->id,
+            'receiver_id' => $this->interlocutor->id,
+            'text' => 'Hello',
         ]);
     }
 );

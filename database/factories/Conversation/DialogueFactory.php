@@ -18,9 +18,9 @@ class DialogueFactory extends Factory
     public function definition(): array
     {
         return [
-            "initiator_id" => User::factory(),
-            "interlocutor_id" => User::factory(),
-            "blocked" => false,
+            'initiator_id' => User::factory(),
+            'interlocutor_id' => User::factory(),
+            'blocked' => false,
         ];
     }
 
@@ -28,7 +28,7 @@ class DialogueFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                "blocked" => true,
+                'blocked' => true,
             ];
         });
     }

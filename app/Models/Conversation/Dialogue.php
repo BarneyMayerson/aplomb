@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\Null_;
 
 class Dialogue extends Model
 {
@@ -21,18 +20,18 @@ class Dialogue extends Model
     protected function casts(): array
     {
         return [
-            "blocked" => "boolean",
+            'blocked' => 'boolean',
         ];
     }
 
     public function initiator(): BelongsTo
     {
-        return $this->belongsTo(User::class, "initiator_id");
+        return $this->belongsTo(User::class, 'initiator_id');
     }
 
     public function interlocutor(): BelongsTo
     {
-        return $this->belongsTo(User::class, "interlocutor_id");
+        return $this->belongsTo(User::class, 'interlocutor_id');
     }
 
     public function isMember(int $userId): bool
@@ -47,7 +46,7 @@ class Dialogue extends Model
             return null;
         }
 
-        if (!$this->isMember(Auth::id())) {
+        if (! $this->isMember(Auth::id())) {
             return null;
         }
 
@@ -73,16 +72,13 @@ class Dialogue extends Model
 
     public static function allByUser(int $userId): Collection
     {
-        return Dialogue::where("initiator_id", $userId)
-            ->orWhere("interlocutor_id", $userId)
-            ->with(["initiator", "interlocutor"])
+        return Dialogue::where('initiator_id', $userId)
+            ->orWhere('interlocutor_id', $userId)
+            ->with(['initiator', 'interlocutor'])
             ->get();
     }
 
     /**
-     * @param string $initiator_id
-     * @param string $interlocutor_id
-     * @return Dialogue
      * @throws DomainException
      */
     public static function findOrCreate(
@@ -91,18 +87,18 @@ class Dialogue extends Model
     ): self {
         // Check if it already exists between those people
         if (
-            static::where("initiator_id", $interlocutor_id)
-                ->where("interlocutor_id", $initiator_id)
+            static::where('initiator_id', $interlocutor_id)
+                ->where('interlocutor_id', $initiator_id)
                 ->exists()
         ) {
-            return static::where("initiator_id", $interlocutor_id)
-                ->where("interlocutor_id", $initiator_id)
+            return static::where('initiator_id', $interlocutor_id)
+                ->where('interlocutor_id', $initiator_id)
                 ->first();
         }
 
         return static::firstOrCreate([
-            "initiator_id" => $initiator_id,
-            "interlocutor_id" => $interlocutor_id,
+            'initiator_id' => $initiator_id,
+            'interlocutor_id' => $interlocutor_id,
         ]);
     }
 

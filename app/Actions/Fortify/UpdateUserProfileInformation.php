@@ -18,37 +18,37 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update(User $user, array $input): void
     {
         Validator::make($input, [
-            "game_username" => [
-                "required",
-                "string",
-                "max:15",
-                Rule::unique("users")->ignore($user->id),
+            'game_username' => [
+                'required',
+                'string',
+                'max:15',
+                Rule::unique('users')->ignore($user->id),
             ],
-            "name" => ["nullable", "string", "max:255"],
-            "email" => [
-                "required",
-                "email",
-                "max:255",
-                Rule::unique("users")->ignore($user->id),
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
             ],
-            "photo" => ["nullable", "mimes:jpg,jpeg,png", "max:2048"],
-        ])->validateWithBag("updateProfileInformation");
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ])->validateWithBag('updateProfileInformation');
 
-        if (isset($input["photo"])) {
-            $user->updateProfilePhoto($input["photo"]);
+        if (isset($input['photo'])) {
+            $user->updateProfilePhoto($input['photo']);
         }
 
         if (
-            $input["email"] !== $user->email &&
+            $input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail
         ) {
             $this->updateVerifiedUser($user, $input);
         } else {
             $user
                 ->forceFill([
-                    "game_username" => $input["game_username"],
-                    "name" => $input["name"],
-                    "email" => $input["email"],
+                    'game_username' => $input['game_username'],
+                    'name' => $input['name'],
+                    'email' => $input['email'],
                 ])
                 ->save();
         }
@@ -63,10 +63,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         $user
             ->forceFill([
-                "game_username" => $input["game_username"],
-                "name" => $input["name"],
-                "email" => $input["email"],
-                "email_verified_at" => null,
+                'game_username' => $input['game_username'],
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'email_verified_at' => null,
             ])
             ->save();
 

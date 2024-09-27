@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $fillable = ["game_username", "email", "password"];
+    protected $fillable = ['game_username', 'email', 'password'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,10 +32,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $hidden = [
-        "password",
-        "remember_token",
-        "two_factor_recovery_codes",
-        "two_factor_secret",
+        'password',
+        'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -43,12 +43,12 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $appends = ["profile_photo_url"];
+    protected $appends = ['profile_photo_url'];
 
     protected function casts(): array
     {
         return [
-            "email_verified_at" => "datetime",
+            'email_verified_at' => 'datetime',
         ];
     }
 
@@ -59,9 +59,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected function defaultProfilePhotoUrl()
     {
-        return "https://ui-avatars.com/api/?name=" .
-            urlencode($this->game_username) .
-            "&color=7F9CF5&background=EBF4FF";
+        return 'https://ui-avatars.com/api/?name='.
+            urlencode($this->game_username).
+            '&color=7F9CF5&background=EBF4FF';
     }
 
     public function posts(): HasMany

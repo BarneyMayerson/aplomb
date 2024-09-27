@@ -13,15 +13,15 @@ class Post extends Model
     protected function casts(): array
     {
         return [
-            "published_at" => "datetime",
+            'published_at' => 'datetime',
         ];
     }
 
     protected static function booted()
     {
         static::saving(
-            fn(self $post) => $post->fill([
-                "html" => str($post->body)->markdown(),
+            fn (self $post) => $post->fill([
+                'html' => str($post->body)->markdown(),
             ])
         );
     }
@@ -33,7 +33,7 @@ class Post extends Model
 
     public function cabinetShowRoute(): string
     {
-        return route("cabinet.posts.show", $this);
+        return route('cabinet.posts.show', $this);
     }
 
     public function isPublished(): bool

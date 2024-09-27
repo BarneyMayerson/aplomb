@@ -2,11 +2,10 @@
 
 use App\Models\Conversation\Dialogue;
 use App\Models\User;
-use PhpParser\Node\Expr\BinaryOp\Equal;
 
 use function Pest\Laravel\actingAs;
 
-it("has an initiator", function () {
+it('has an initiator', function () {
     $dialogue = Dialogue::factory()->make();
 
     expect($dialogue->initiator)
@@ -14,7 +13,7 @@ it("has an initiator", function () {
         ->toBeNull();
 });
 
-it("has an interlocutor", function () {
+it('has an interlocutor', function () {
     $dialogue = Dialogue::factory()->make();
 
     expect($dialogue->interlocutor)
@@ -22,7 +21,7 @@ it("has an interlocutor", function () {
         ->toBeNull();
 });
 
-it("can be blocked", function () {
+it('can be blocked', function () {
     $dialogue = Dialogue::factory()->make();
 
     expect($dialogue->blocked)->toBeFalsy();
@@ -32,7 +31,7 @@ it("can be blocked", function () {
     expect($dialogue->blocked)->toBeTruthy();
 });
 
-it("can be unblocked", function () {
+it('can be unblocked', function () {
     $dialogue = Dialogue::factory()->blocked()->make();
 
     expect($dialogue->blocked)->toBeTruthy();
@@ -42,7 +41,7 @@ it("can be unblocked", function () {
     expect($dialogue->blocked)->toBeFalsy();
 });
 
-it("can detemine whether a user is the member", function () {
+it('can detemine whether a user is the member', function () {
     $dialogue = Dialogue::factory()->make();
 
     $user = User::factory()->create();
@@ -52,7 +51,7 @@ it("can detemine whether a user is the member", function () {
     expect($dialogue->isMember($dialogue->interlocutor->id))->toBeTruthy();
 });
 
-it("can determine the partner for the authenticated user", function () {
+it('can determine the partner for the authenticated user', function () {
     $dialogue = Dialogue::factory()->make();
 
     expect($dialogue->partner())->toBeNull();
@@ -70,7 +69,7 @@ it("can determine the partner for the authenticated user", function () {
     expect($dialogue->partner())->toBeNull();
 });
 
-it("can find a dialogue between two persons", function () {
+it('can find a dialogue between two persons', function () {
     $dialogue = Dialogue::factory()->create();
 
     $initiator = $dialogue->initiator;

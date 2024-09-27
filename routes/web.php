@@ -16,40 +16,40 @@ use Inertia\Inertia;
 |
 */
 
-Route::get("/", function () {
-    return Inertia::render("Welcome", [
-        "canLogin" => Route::has("login"),
-        "canRegister" => Route::has("register"),
-        "laravelVersion" => Application::VERSION,
-        "phpVersion" => PHP_VERSION,
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
     ]);
-})->name("home");
+})->name('home');
 
-Route::get("/modal", function () {
-    return Inertia::modal("Modal")->baseRoute("dashboard");
+Route::get('/modal', function () {
+    return Inertia::modal('Modal')->baseRoute('dashboard');
 });
 
-Route::get("/grid", function () {
-    return Inertia::render("Grid");
-})->name("grid");
+Route::get('/grid', function () {
+    return Inertia::render('Grid');
+})->name('grid');
 
 Route::middleware([
-    "auth:sanctum",
-    config("jetstream.auth_session"),
-    "verified",
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
 ])->group(function () {
-    Route::get("/dashboard", function () {
-        return Inertia::render("Dashboard");
-    })->name("dashboard");
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-    Route::get("/test", function () {
-        return redirect(route("dashboard"))->dangerBanner("No way!");
+    Route::get('/test', function () {
+        return redirect(route('dashboard'))->dangerBanner('No way!');
     });
 });
 
-require __DIR__ . "/User/cabinet.php";
+require __DIR__.'/User/cabinet.php';
 
 Route::get(
-    "profile/{user:game_username}",
+    'profile/{user:game_username}',
     PublicProfileController::class
-)->name("public-profile");
+)->name('public-profile');

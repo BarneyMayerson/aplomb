@@ -2,9 +2,9 @@
 
 use App\Models\Post;
 
-it("generates the html", function () {
+it('generates the html', function () {
     $post = Post::factory()->make([
-        "body" => "## Hello there!",
+        'body' => '## Hello there!',
     ]);
 
     $post->save();
