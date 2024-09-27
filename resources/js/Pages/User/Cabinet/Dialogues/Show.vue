@@ -24,7 +24,7 @@ const props = defineProps(["dialogue"]);
           .
         </h3>
         <div
-          class="flex flex-col-reverse h-96 border border-gray-300 dark:border-gray-700 rounded-lg px-4 overflow-y-auto mt-4"
+          class="mt-4 flex h-96 flex-col-reverse overflow-y-auto rounded-lg border border-gray-300 px-4 dark:border-gray-700"
         >
           <template v-for="message in dialogue.messages" :key="message.id">
             <div class="w-full space-y-2">
